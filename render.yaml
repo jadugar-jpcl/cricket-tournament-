@@ -1,0 +1,6 @@
+services:
+  - type: web
+    name: room-cricket-league
+    runtime: static
+    buildCommand: "echo 'Static site ready'"
+    staticPublishPath: .
