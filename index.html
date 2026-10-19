@@ -37,6 +37,25 @@
   .menu-btn{padding:8px}
 }
 
+
+/* Squad cards, grouped rounds, and responsive public standings. */
+.team-roster-card{background:#fff;border:1px solid #e4eaf3;border-radius:16px;box-shadow:0 9px 24px #14244c09;overflow:hidden;min-width:0}
+.team-roster-card .team-roster-head{display:flex;align-items:center;gap:14px;padding:20px 21px;border-bottom:1px solid #edf0f6}
+.team-roster-card .team-roster-head .team-crest{height:54px;width:54px;font-size:21px}
+.team-roster-card .team-roster-head b{font:900 23px 'Barlow Condensed',sans-serif;display:block;line-height:1.05;text-transform:uppercase}
+.team-roster-card .team-roster-head small{font-size:11px;color:#77869b;display:block;margin-top:7px;font-weight:800}
+.squad-list{list-style:none;margin:0;padding:8px 20px 17px}
+.squad-list li{padding:10px 0;display:flex;justify-content:space-between;gap:8px;border-bottom:1px solid #eff2f7;font-size:13px;font-weight:800}
+.squad-list li:last-child{border:0}
+.squad-list .squad-role{font-size:11px;font-weight:600;color:#8895a9;text-align:right}
+.squad-heading{font-size:10px;text-transform:uppercase;font-weight:900;letter-spacing:1.4px;color:#8c98a9;margin:16px 20px 0}
+.squad-empty{margin:0;padding:12px 20px 21px;color:#71839b;font-size:12px}
+.round-card{margin-bottom:25px}
+.round-card-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:21px 22px;background:#f9fced;border-bottom:1px solid #e4eaf3}
+.round-card-heading h2{margin:0;font:900 27px 'Barlow Condensed',sans-serif;text-transform:uppercase}
+.round-card-heading small{font-size:11px;font-weight:800;color:#74816b}
+@media(max-width:800px){.team-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:560px){.team-grid{grid-template-columns:1fr}.round-card-heading{padding:17px}}
   </style>
 </head>
 <body>
@@ -48,7 +67,7 @@
 (() => {
   'use strict';
   const cfg = window.JPCL_CONFIG || {};
-  const state={page:'overview', matchFilter:'all', adminTab:'results', menu:false, mode:'loading', admin:false, session:null, selectedMatchId:'', editTeamId:'', flash:'', flashType:'ok', teams:[], matches:[], players:[], player_performances:[]};
+  const state={page:'overview', matchFilter:'all', adminTab:'results', menu:false, mode:'loading', admin:false, session:null, selectedMatchId:'', editTeamId:'', selectedTeamId:'', flash:'', flashType:'ok', teams:[], matches:[], players:[], player_performances:[]};
   let db=null;
   const $=id=>document.getElementById(id);
   const e = v => String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -67,9 +86,9 @@
   const score=(m,n)=>m[`team${n}_runs`]==null?'—':`${m[`team${n}_runs`]}/${m[`team${n}_wickets`]??0}`;
   const initials=s=>String(s||'').split(/\s+/).map(x=>x[0]).slice(0,3).join('').toUpperCase();
   const crest=(t,cls='')=>`<div class="team-crest ${cls}" style="--team-color:${safeColor(t.color)}">${e(t.short_name||initials(t.name))}</div>`;
-  const stats=()=>{
-    const rows=state.teams.map(t=>({team:t,played:0,won:0,lost:0,tied:0,points:0}));
-    for(const m of completed()){
+  const stats=(matches=completed(),allowedTeams=null)=>{
+    const rows=state.teams.filter(t=>!allowedTeams||allowedTeams.has(t.id)).map(t=>({team:t,played:0,won:0,lost:0,tied:0,points:0}));
+    for(const m of matches){
       const a=rows.find(x=>x.team.id===m.team1_id),b=rows.find(x=>x.team.id===m.team2_id);
       if(!a||!b)continue;
       a.played++;b.played++;
@@ -78,6 +97,21 @@
       else{a.tied++;b.tied++;a.points++;b.points++;}
     }
     return rows.sort((a,b)=>b.points-a.points||b.won-a.won||a.team.name.localeCompare(b.team.name));
+  };
+  const pointsStages=()=>{
+    const names=new Map();
+    for(const m of state.matches){
+      const label=String(m.stage||'League match').trim()||'League match';
+      // Knockout fixtures are shown under Matches but don't create a standings table.
+      if(/^(semi[ -]?finals?|finals?|quarter[ -]?finals?|knockouts?|playoffs?|eliminators?)$/i.test(label))continue;
+      if(!names.has(label.toLowerCase()))names.set(label.toLowerCase(),label);
+    }
+    return [...names.values()].sort((a,b)=>a.localeCompare(b,undefined,{numeric:true,sensitivity:'base'}));
+  };
+  const stageStats=stage=>{
+    const matches=state.matches.filter(m=>String(m.stage||'League match').trim().toLowerCase()===stage.toLowerCase());
+    const participating=new Set(matches.flatMap(m=>[m.team1_id,m.team2_id]));
+    return stats(matches.filter(m=>m.status==='completed'),participating);
   };
   const playerStats=()=>state.players.map(p=>{
     const perf=state.player_performances.filter(x=>x.player_id===p.id);
@@ -113,8 +147,18 @@
     ${banner()}</div></main>`;
   const banner=()=>`<div class="banner"><div><h3>YOUR TOURNAMENT. YOUR SCOREBOARD.</h3><p>Scores and results are entered by your league admin. Updates appear as soon as they are saved.</p></div><button class="btn primary" data-page="admin">Manage results ↗</button></div>`;
   const matchesPage=()=>`<main class="main"><div class="container"><div class="page-heading"><div class="kicker">The match centre</div><h1>FIXTURES & RESULTS</h1><p>Match schedules, official scores, and results published by the tournament admin.</p></div><div class="filter-bar">${[['all','All matches'],['upcoming','Upcoming'],['completed','Results'],['live','Live']].map(([k,v])=>`<button data-filter="${k}" class="${state.matchFilter===k?'selected':''}">${v}</button>`).join('')}</div><div class="match-list">${sortedMatches().filter(m=>state.matchFilter==='all'||(state.matchFilter==='upcoming'?['upcoming','live'].includes(m.status):m.status===state.matchFilter)).map(matchCard).join('')||empty('No matches in this category')}</div>${banner()}</div></main>`;
-  const standingsPage=()=>`<main class="main"><div class="container"><div class="page-heading"><div class="kicker">League rankings</div><h1>THE POINTS TABLE</h1><p>Win = 2 points. Tie or no winner = 1 point each. Rankings update automatically from completed results.</p></div><div class="card">${tableMarkup()}</div><div class="highlight-box" style="margin:17px 0 0"><strong>How it works</strong><p>Played (P), Won (W), Lost (L), Tied / No winner (T), and Points (PTS). Teams tied on points are ordered by wins, then name. Custom league rules can be added later.</p></div>${banner()}</div></main>`;
-  const teamsPage=()=>`<main class="main"><div class="container"><div class="page-heading"><div class="kicker">Meet the competitors</div><h1>OUR TEAMS</h1><p>Meet the teams competing for the JPCL title.</p></div><div class="team-grid">${state.teams.map(t=>`<div class="team-tile">${crest(t)}<div><b>${e(t.name)}</b><small>${e(t.short_name)} · ${state.players.filter(p=>p.team_id===t.id).length} player(s)</small></div></div>`).join('')||empty('Teams will appear here')}</div>${banner()}</div></main>`;
+  const standingsPage=()=>{
+    const stages=pointsStages();
+    const cards=stages.map(stage=>{
+      const matches=state.matches.filter(m=>String(m.stage||'League match').trim().toLowerCase()===stage.toLowerCase());
+      return `<section class="card round-card"><div class="round-card-heading"><h2>${e(stage)} — POINTS TABLE</h2><small>${matches.filter(m=>m.status==='completed').length} / ${matches.length} MATCHES</small></div>${tableMarkup(stageStats(stage))}</section>`;
+    }).join('');
+    return `<main class="main"><div class="container"><div class="page-heading"><div class="kicker">League rankings</div><h1>THE POINTS TABLE</h1><p>Separate standings for each round. Round 2 starts at zero without changing Round 1.</p></div>${stages.length?cards:`<div class="card">${tableMarkup()}</div>`}${stages.length>1?`<section class="card round-card"><div class="round-card-heading"><h2>ALL ROUNDS COMBINED</h2><small>OVERALL RECORD</small></div>${tableMarkup()}</section>`:''}<div class="highlight-box" style="margin:17px 0 0"><strong>How points work</strong><p>Win = 2 points. Tie or no winner = 1 point each. Only completed matches count; each round has its own fresh points table. Tied teams are ordered by wins, then name.</p></div>${banner()}</div></main>`;
+  };
+  const teamsPage=()=>`<main class="main"><div class="container"><div class="page-heading"><div class="kicker">Meet the competitors</div><h1>JPCL TEAMS & SQUADS</h1><p>Every team and its registered players, updated by the tournament admin.</p></div><div class="team-grid">${state.teams.map(t=>{
+    const squad=state.players.filter(p=>p.team_id===t.id).sort((a,b)=>a.name.localeCompare(b.name));
+    return `<article class="team-roster-card"><div class="team-roster-head">${crest(t)}<div><b>${e(t.name)}</b><small>${e(t.short_name)} · ${squad.length} ${squad.length===1?'player':'players'}</small></div></div><div class="squad-heading">Team squad</div>${squad.length?`<ul class="squad-list">${squad.map((p,i)=>`<li><span>${i+1}. ${e(p.name)}</span><span class="squad-role">${e(p.role||'Player')}</span></li>`).join('')}</ul>`:'<p class="squad-empty">Players will appear here after the admin adds them.</p>'}</article>`;
+  }).join('')||empty('Teams will appear here')}</div>${banner()}</div></main>`;
   const ranking=(field,label)=>{const rows=playerStats().sort((a,b)=>b[field]-a[field]||a.player.name.localeCompare(b.player.name));return `<div class="card"><div class="ranking-header"><h3>${e(label)}</h3><span>${field==='runs'?'RUNS':'WICKETS'}</span></div><div class="table-scroll"><table class="data-table"><thead><tr><th>Rank</th><th>Player</th><th>Team</th><th>${field==='runs'?'Runs':'Wkts'}</th></tr></thead><tbody>${rows.slice(0,10).map((r,i)=>`<tr><td class="rank-num">${String(i+1).padStart(2,'0')}</td><td>${e(r.player.name)}</td><td>${e(team(r.player.team_id).short_name)}</td><td class="rank-points">${r[field]}</td></tr>`).join('')||'<tr><td colspan="4">No player statistics yet</td></tr>'}</tbody></table></div></div>`};
   const playersPage=()=>`<main class="main"><div class="container"><div class="page-heading"><div class="kicker">The individual battles</div><h1>PLAYER LEADERBOARDS</h1><p>Track runs and wickets entered by the tournament admin. Rankings reflect saved match performances.</p></div><div class="layout-two">${ranking('runs','Top run scorers')}${ranking('wickets','Top wicket takers')}</div><div class="section-gap">${section('Meet the squad','Registered players')}<div class="card table-scroll"><table class="data-table"><thead><tr><th>Player</th><th>Team</th><th>Matches</th><th>Runs</th><th>Wickets</th></tr></thead><tbody>${playerStats().map(p=>`<tr><td>${e(p.player.name)}</td><td>${e(team(p.player.team_id).name)}</td><td>${p.matches}</td><td>${p.runs}</td><td>${p.wickets}</td></tr>`).join('')||'<tr><td colspan="5">No players yet</td></tr>'}</tbody></table></div></div></div></main>`;
   const optionTeams=(selected='')=>`<option value="">Select team</option>${state.teams.map(t=>`<option value="${e(t.id)}" ${t.id===selected?'selected':''}>${e(t.name)}</option>`).join('')}`;
@@ -139,12 +183,12 @@
          <div class="wide">${field('Result summary (shown publicly)','result_summary',m.result_summary||'','text','placeholder="e.g. Team A won by 6 runs"')}</div>
        </div>${formBtn('Save and publish result')}</form>`:'<div class="alert">Add a match under the Fixtures tab first.</div>'}</div>`;
   };
-  const adminFixtures=()=>`<div class="form-card"><h3>Add a new fixture</h3><p>Schedule a match for two teams, or leave the date blank to announce it later.</p><form id="match-form"><div class="form-grid">${selectField('Team A','team1_id',optionTeams())}${selectField('Team B','team2_id',optionTeams())}${field('Match stage / round','stage','League match','text','required maxlength="80"')}${field('Date and time (optional)','scheduled_at','','datetime-local')}</div>${formBtn('Add fixture')}</form></div><div class="form-card"><h3>Existing fixtures</h3><p>Choose Edit result to score a match.</p><div class="admin-list">${sortedMatches().map(m=>`<div class="admin-list-item"><div><strong>${e(team(m.team1_id).short_name)} vs ${e(team(m.team2_id).short_name)}</strong><small>${e(m.stage)} · ${e(m.status)} · ${e(dateLabel(m.scheduled_at))}</small></div><div class="controls"><button class="tiny-btn" data-edit-match="${e(m.id)}">Edit result</button><button class="tiny-btn danger" data-delete-match="${e(m.id)}">Delete</button></div></div>`).join('')||'<div class="notice">No matches yet</div>'}</div></div>`;
+  const adminFixtures=()=>`<div class="form-card"><h3>Add a new fixture</h3><p>To start a new table, enter a new round name (e.g. <b>Round 2</b>). Its points table appears automatically — no code needed.</p><form id="match-form"><div class="form-grid">${selectField('Team A','team1_id',optionTeams())}${selectField('Team B','team2_id',optionTeams())}${field('Round / stage','stage','Round 1','text','required maxlength="80" list="jpcl-rounds" placeholder="Round 1, Round 2, etc."')}<datalist id="jpcl-rounds">${[...new Set(['Round 1','Round 2','Round 3',...pointsStages()])].map(x=>`<option value="${e(x)}"></option>`).join('')}</datalist>${field('Date and time (optional)','scheduled_at','','datetime-local')}</div>${formBtn('Add fixture')}</form></div><div class="form-card"><h3>Existing fixtures</h3><p>Choose Edit result to score a match.</p><div class="admin-list">${sortedMatches().map(m=>`<div class="admin-list-item"><div><strong>${e(team(m.team1_id).short_name)} vs ${e(team(m.team2_id).short_name)}</strong><small>${e(m.stage)} · ${e(m.status)} · ${e(dateLabel(m.scheduled_at))}</small></div><div class="controls"><button class="tiny-btn" data-edit-match="${e(m.id)}">Edit result</button><button class="tiny-btn danger" data-delete-match="${e(m.id)}">Delete</button></div></div>`).join('')||'<div class="notice">No matches yet</div>'}</div></div>`;
   const adminTeams=()=>{
     const t=state.teams.find(t=>t.id===state.editTeamId);
-    return `<div class="form-card"><h3>${t?'Edit team':'Add a new team'}</h3><p>Choose the short code and colour displayed on fixtures and standings.</p><form id="team-form"><div class="form-grid">${field('Team name','name',t?.name||'','text','required maxlength="70"')}${field('Short code (2–5 letters)','short_name',t?.short_name||'','text','required minlength="2" maxlength="5"')}${field('Team colour','color',t?.color||'#c6fb63','color')}</div>${formBtn(t?'Save team changes':'Add team')}</form>${t?'<button class="tiny-btn" style="margin-top:12px" data-action="cancel-edit-team">Cancel edit</button>':''}</div><div class="form-card"><h3>Teams (${state.teams.length})</h3><p>You can delete teams only if they are not used by existing matches.</p><div class="admin-list">${state.teams.map(t=>`<div class="admin-list-item"><div class="team-cell">${crest(t)}<div><strong>${e(t.name)}</strong><small>${e(t.short_name)}</small></div></div><div class="controls"><button class="tiny-btn" data-edit-team="${e(t.id)}">Edit</button><button class="tiny-btn danger" data-delete-team="${e(t.id)}">Delete</button></div></div>`).join('')||'<div class="notice">Add your first team</div>'}</div></div>`;
+    return `<div class="form-card"><h3>${t?'Edit team':'Add a new team'}</h3><p>Choose the short code and colour displayed on fixtures and standings.</p><form id="team-form"><div class="form-grid">${field('Team name','name',t?.name||'','text','required maxlength="70"')}${field('Short code (2–5 letters)','short_name',t?.short_name||'','text','required minlength="2" maxlength="5"')}${field('Team colour','color',t?.color||'#c6fb63','color')}</div>${formBtn(t?'Save team changes':'Add team')}</form>${t?'<button class="tiny-btn" style="margin-top:12px" data-action="cancel-edit-team">Cancel edit</button>':''}</div><div class="form-card"><h3>Teams (${state.teams.length})</h3><p>You can delete teams only if they are not used by existing matches.</p><div class="admin-list">${state.teams.map(t=>`<div class="admin-list-item"><div class="team-cell">${crest(t)}<div><strong>${e(t.name)}</strong><small>${e(t.short_name)}</small></div></div><div class="controls"><button class="tiny-btn" data-add-player-for="${e(t.id)}">Add players</button><button class="tiny-btn" data-edit-team="${e(t.id)}">Edit</button><button class="tiny-btn danger" data-delete-team="${e(t.id)}">Delete</button></div></div>`).join('')||'<div class="notice">Add your first team</div>'}</div></div>`;
   };
-  const adminPlayers=()=>`<div class="form-card"><h3>Add a player</h3><p>Register players for leaderboards and match statistics.</p><form id="player-form"><div class="form-grid">${field('Player name','name','','text','required maxlength="70"')}${selectField('Team','team_id',optionTeams())}${field('Role (optional)','role','Player','text','maxlength="40"')}</div>${formBtn('Add player')}</form></div><div class="form-card"><h3>Registered players (${state.players.length})</h3><div class="admin-list">${state.players.map(p=>`<div class="admin-list-item"><div><strong>${e(p.name)}</strong><small>${e(team(p.team_id).name)} · ${e(p.role)}</small></div><button class="tiny-btn danger" data-delete-player="${e(p.id)}">Delete</button></div>`).join('')||'<div class="notice">No players yet</div>'}</div></div>`;
+  const adminPlayers=()=>`<div class="form-card"><h3>Add a player</h3><p>Register players for leaderboards and match statistics.</p><form id="player-form"><div class="form-grid">${field('Player name','name','','text','required maxlength="70"')}${selectField('Team','team_id',optionTeams(state.selectedTeamId))}${field('Role (optional)','role','Player','text','maxlength="40"')}</div>${formBtn('Add player')}</form></div><div class="form-card"><h3>Registered players (${state.players.length})</h3><div class="admin-list">${state.players.map(p=>`<div class="admin-list-item"><div><strong>${e(p.name)}</strong><small>${e(team(p.team_id).name)} · ${e(p.role)}</small></div><button class="tiny-btn danger" data-delete-player="${e(p.id)}">Delete</button></div>`).join('')||'<div class="notice">No players yet</div>'}</div></div>`;
   const adminStats=()=>`<div class="form-card"><h3>Player performance</h3><p>Enter or correct a player's numbers for a match. Saving the same player and match updates the existing record.</p><form id="stat-form"><div class="form-grid">${selectField('Match','match_id',optionMatches())}${selectField('Player','player_id',`<option value="">Select player</option>${state.players.map(p=>`<option value="${e(p.id)}">${e(p.name)} (${e(team(p.team_id).short_name)})</option>`).join('')}`)}${field('Runs','runs',0,'number','required min="0"')}${field('Wickets','wickets',0,'number','required min="0" max="10"')}${field('Catches','catches',0,'number','required min="0" max="10"')}</div>${formBtn('Save player numbers')}</form></div><div class="form-card"><h3>Saved performances</h3><div class="admin-list">${state.player_performances.map(r=>{const p=state.players.find(p=>p.id===r.player_id);return `<div class="admin-list-item"><div><strong>${e(p?.name||'Player')} · ${e(team(p?.team_id).short_name)}</strong><small>${e(state.matches.find(m=>m.id===r.match_id)?.stage||'Match')} · ${r.runs} runs · ${r.wickets} wickets</small></div><button class="tiny-btn danger" data-delete-stat="${e(r.id)}">Delete</button></div>`}).join('')||'<div class="notice">No stats added</div>'}</div></div>`;
   const adminSettings=()=>`<div class="form-card"><h3>Website settings</h3><p>Change the public tournament name, season and announcement. Click Save — no coding required.</p><form id="settings-form"><div class="form-grid">${field('Full tournament name','name',cfg.name||'Jadugar Paltalk Cricket League','text','required maxlength="90"')}${field('Short name','short_name',cfg.shortName||'JPCL','text','required maxlength="12"')}${field('Season','season',cfg.season||'SEASON 01','text','maxlength="40"')}${field('Tagline','tagline',cfg.tagline||'Official Tournament Hub','text','maxlength="140"')}<div class="wide">${field('Announcement (optional)','announcement',cfg.announcement||'','text','maxlength="240" placeholder="News you want to show on the homepage"')}</div></div>${formBtn('Save website settings')}</form></div>`;
   const adminPage=()=>!state.admin?login():`<main class="main"><div class="container"><div class="page-heading"><div class="kicker">Tournament control centre</div><h1>ADMIN DASHBOARD</h1><p>Manage results, fixtures, teams, and player performances. Changes publish to the public pages.</p></div>${alertMarkup()}<div class="stat-grid" style="margin-bottom:24px">${[['Teams',state.teams.length],['Matches',state.matches.length],['Completed',completed().length]].map(([k,v])=>`<div class="stat-card"><b>${v}</b><span>${k}</span></div>`).join('')}</div><div class="admin-shell"><div class="admin-menu">${[['results','🏏 Match results'],['fixtures','▦ Fixtures'],['teams','⚑ Teams'],['players','♙ Players'],['stats','◈ Player stats'],['settings','⚙ Site settings']].map(([k,v])=>`<button data-admin-tab="${k}" class="${state.adminTab===k?'active':''}">${v}</button>`).join('')}<button data-action="logout">⇤ Sign out</button></div><div class="admin-main"><div class="admin-header"><h2>${e(({results:'MATCH RESULTS',fixtures:'FIXTURES',teams:'TEAMS',players:'PLAYERS',stats:'PLAYER STATS',settings:'SITE SETTINGS'})[state.adminTab])}</h2><span class="pill gray">ADMIN ONLY</span></div>${({results:adminResults,fixtures:adminFixtures,teams:adminTeams,players:adminPlayers,stats:adminStats,settings:adminSettings})[state.adminTab]()}</div></div></div></main>`;
@@ -222,6 +266,7 @@
     }
     if(form.id==='player-form'){
       if(!data.name.trim()||!data.team_id){flash('Choose a team and player name.','error');return;}
+      state.selectedTeamId=data.team_id;
       await actionWrite(()=>db.from('players').insert({name:data.name.trim(),team_id:data.team_id,role:data.role?.trim()||'Player'}),'Player added.');return;
     }
     if(form.id==='stat-form'){
@@ -241,6 +286,7 @@
     if(t.dataset.action==='toggle-menu'){state.menu=!state.menu;render();return;}
     if(t.dataset.action==='cancel-edit-team'){state.editTeamId='';render();return;}
     if(t.dataset.action==='logout'){if(db)await db.auth.signOut();state.admin=false;state.session=null;go('overview');return;}
+    if(t.dataset.addPlayerFor){state.selectedTeamId=t.dataset.addPlayerFor;state.adminTab='players';state.flash='';render();return;}
     if(t.dataset.editTeam){state.editTeamId=t.dataset.editTeam;state.adminTab='teams';render();return;}
     if(t.dataset.editMatch){state.selectedMatchId=t.dataset.editMatch;state.adminTab='results';render();return;}
     const deleteMap=[['deleteMatch','matches','match'],['deleteTeam','teams','team'],['deletePlayer','players','player'],['deleteStat','player_performances','performance']];
