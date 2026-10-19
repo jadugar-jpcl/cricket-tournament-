@@ -1,20 +1,273 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#0b1225" />
-  <meta name="description" content="Fixtures, scores, standings and player statistics for Jadugar Paltalk Cricket League." />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b1225">
+  <meta name="description" content="JPCL — Jadugar Paltalk Cricket League. Fixtures, results, points table and player rankings.">
   <title>JPCL | Jadugar Paltalk Cricket League</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800;900&family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800;900&family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+:root{--ink:#0b1225;--ink2:#111d38;--ink3:#1a2948;--muted:#7c8ba7;--lime:#c6fb63;--lime2:#a7ea3d;--white:#fff;--paper:#f4f6fa;--line:#e4e9f2;--red:#ff746a;--green:#2cb985;--radius:20px;--shadow:0 12px 36px rgba(10,23,50,.06)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);font-family:'DM Sans',Arial,sans-serif;color:#14203b;-webkit-font-smoothing:antialiased}button,input,select,textarea{font:inherit}button{cursor:pointer}a{text-decoration:none;color:inherit}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #95dd22;outline-offset:3px}.boot{display:grid;place-items:center;min-height:100vh;color:#68758d}.container{width:min(1220px,calc(100% - 48px));margin-inline:auto}.topbar{height:75px;background:#0a1224;color:#d9e1f2;border-bottom:1px solid #24304b;position:sticky;top:0;z-index:60}.top-inner{height:100%;display:flex;align-items:center;gap:32px}.brand{display:flex;align-items:center;gap:11px;min-width:228px}.brand-mark{width:43px;height:43px;border-radius:12px;background:var(--lime);color:#101a2b;display:grid;place-items:center;transform:rotate(-7deg);font:900 22px 'Barlow Condensed',sans-serif;box-shadow:0 0 20px #b5f35d2b}.brand-mark span{transform:rotate(7deg)}.brand-txt{display:flex;flex-direction:column;line-height:1.12}.brand-txt b{font:900 20px 'Barlow Condensed',sans-serif;letter-spacing:1.1px}.brand-txt small{font-size:9px;letter-spacing:2px;color:#9daac3;font-weight:800;margin-top:3px}.nav{display:flex;gap:8px;align-items:center;flex:1}.nav button{border:0;background:none;color:#a7b4cd;padding:10px 12px;border-radius:9px;font-weight:800;font-size:12px;transition:.2s;white-space:nowrap}.nav button:hover,.nav button.active{background:#202e49;color:var(--lime)}.top-actions{display:flex;gap:8px}.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;padding:13px 19px;border:0;border-radius:10px;font-weight:800;font-size:13px;transition:transform .15s,background .2s}.btn:hover{transform:translateY(-1px)}.btn.primary{background:var(--lime);color:#10192a}.btn.primary:hover{background:#ddffa0}.btn.dark{background:#12203b;color:white}.btn.ghost{background:transparent;border:1px solid #d6deeb;color:#263855}.btn.glass{border:1px solid #39435b;color:#e7effe;background:#ffffff0d}.btn.small{padding:10px 13px;font-size:12px}.btn:disabled{opacity:.5;cursor:not-allowed}.menu-btn{display:none;border:1px solid #36435e;background:#18243c;border-radius:8px;color:white;padding:8px 11px}.demo-ribbon{background:#e9f8c8;color:#253820;text-align:center;padding:9px 16px;font-size:12px;font-weight:700}.demo-ribbon b{margin-right:8px;background:#2a3e1c;color:#ecffc8;border-radius:3px;padding:3px 7px;font-size:10px}.hero{background:linear-gradient(121deg,#0c1429 5%,#162643 68%,#1d2940);color:white;position:relative;overflow:hidden}.hero:before{content:"";position:absolute;background:radial-gradient(closest-side,#9add4c31,transparent 72%);width:850px;height:850px;right:-350px;top:-320px;pointer-events:none}.hero:after{content:"";position:absolute;inset:0;opacity:.09;pointer-events:none;background-image:linear-gradient(#ffffff24 1px,transparent 1px),linear-gradient(90deg,#ffffff24 1px,transparent 1px);background-size:44px 44px;mask-image:linear-gradient(90deg,transparent 10%,black 100%)}.hero-in{display:grid;grid-template-columns:1.12fr .88fr;align-items:center;min-height:425px;gap:70px;padding:52px 0;position:relative;z-index:2}.eyebrow{font-size:11px;letter-spacing:3px;font-weight:900;text-transform:uppercase;color:#a5ed5d;display:flex;align-items:center;gap:10px}.eyebrow:before{content:"";width:18px;height:2px;background:var(--lime)}h1,h2,h3,h4,p{margin-top:0}.hero h1{font:900 clamp(52px,5vw,74px)/.91 'Barlow Condensed',sans-serif;letter-spacing:-1.7px;text-transform:uppercase;margin:26px 0 22px;max-width:600px}.hero h1 em{font-style:normal;color:var(--lime)}.hero p{color:#aebbd3;max-width:480px;line-height:1.8;font-size:14px}.hero-buttons{display:flex;gap:12px;margin-top:28px;flex-wrap:wrap}.hero-panel{position:relative;transform:rotate(1.5deg)}.panel-glow{position:absolute;inset:25px 25px -20px;filter:blur(42px);background:#c2f85c23}.feature-card{position:relative;background:linear-gradient(160deg,#21314f,#111b31);border:1px solid #3c506f;border-radius:20px;padding:22px;box-shadow:0 35px 100px #04091488;overflow:hidden}.feature-card:before{content:"";position:absolute;width:250px;height:250px;background:#b2ff5530;filter:blur(90px);right:-110px;top:-115px}.feature-top{display:flex;justify-content:space-between;gap:8px;align-items:center}.micro{font-size:10px;letter-spacing:1.8px;text-transform:uppercase;font-weight:900;color:#a7b9d4}.pill{border-radius:999px;padding:7px 10px;font-size:10px;letter-spacing:1px;font-weight:900;text-transform:uppercase}.pill.lime{background:#c4fc6030;color:var(--lime)}.pill.red{background:#ff676027;color:#ff938a}.pill.gray{background:#e9edf5;color:#677791}.feature-versus{display:grid;grid-template-columns:1fr 46px 1fr;align-items:center;gap:8px;text-align:center;margin:30px 0 21px}.team-crest{display:grid;place-items:center;border-radius:15px;background:var(--team-color,#c6fb63);color:#111b32;font:900 24px 'Barlow Condensed',sans-serif;box-shadow:inset 0 -8px 20px #00000018;flex-shrink:0}.feature-team .team-crest{width:66px;height:66px;margin:0 auto 12px;transform:rotate(-4deg)}.feature-team strong{display:block;color:#fff;font:800 19px 'Barlow Condensed',sans-serif;text-transform:uppercase;line-height:1.1;letter-spacing:.5px}.feature-team small{color:#9daec9;font-size:10px;display:block;margin-top:7px}.vs{font:900 27px 'Barlow Condensed',sans-serif;color:#6f809b}.feature-footer{border-top:1px solid #3a4863;display:flex;justify-content:space-between;align-items:center;padding-top:17px;color:#c5d0e2;font-size:11px}.feature-footer strong{color:var(--lime)}.metrics{display:grid;grid-template-columns:repeat(4,1fr);position:relative;z-index:2;border-top:1px solid #35445c}.metric{padding:20px 0 26px;display:flex;align-items:center;gap:13px;border-right:1px solid #35445c;padding-left:25px}.metric:first-child{padding-left:0}.metric:last-child{border:0}.metric-icon{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;font-size:19px;color:var(--lime);background:#c6fb6316}.metric strong{display:block;font:900 26px 'Barlow Condensed',sans-serif;line-height:1}.metric span{display:block;font-size:10px;color:#a5b4cf;letter-spacing:1px;text-transform:uppercase;font-weight:800;margin-top:6px}.main{padding:50px 0 75px}.section-head{display:flex;justify-content:space-between;align-items:flex-end;gap:14px;margin-bottom:22px}.kicker{font-size:10px;font-weight:900;letter-spacing:2px;color:#659525;text-transform:uppercase;margin-bottom:9px}.section-head h2,.page-heading h1{font:900 36px/.98 'Barlow Condensed',sans-serif;text-transform:uppercase;letter-spacing:.1px;margin:0}.section-head p,.page-heading p{font-size:13px;color:#8793a9;line-height:1.6;margin:10px 0 0}.view-all{background:none;border:0;color:#315379;font-size:12px;font-weight:900;white-space:nowrap}.view-all:hover{color:#6fa12e}.layout-two{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(300px,1fr);gap:26px}.card{background:white;border:1px solid #e4eaf3;border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}.card-pad{padding:22px}.section-gap{margin-top:40px}.match-list{display:grid;gap:12px}.match-card{background:white;border:1px solid #e4eaf3;border-radius:16px;padding:20px 22px;box-shadow:var(--shadow)}.match-card-head{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:17px}.match-meta{font-size:10px;color:#8896ab;text-transform:uppercase;letter-spacing:1.3px;font-weight:900}.match-line{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;gap:8px}.match-side{display:flex;align-items:center;gap:11px;min-width:0}.match-side:last-child{justify-content:flex-end;text-align:right;flex-direction:row-reverse}.match-side .team-crest{width:41px;height:41px;font-size:17px;border-radius:11px}.match-side strong{display:block;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.match-side small{font-size:11px;color:#8c9ab0;display:block;margin-top:3px}.score-num{font:900 21px 'Barlow Condensed',sans-serif;color:#0f1c35;white-space:nowrap}.match-center{text-align:center}.mobile-score,.mobile-vs{display:none!important}.match-center b{font:900 19px 'Barlow Condensed',sans-serif;color:#94a0b2}.match-summary{text-align:center;border-top:1px solid #edf0f6;color:#6e7d95;padding-top:12px;margin-top:16px;font-size:11px;font-weight:700}.points-table,.data-table{width:100%;border-collapse:collapse}.points-table th,.data-table th{text-align:left;padding:13px 12px;font-size:10px;letter-spacing:1px;color:#8290a7;text-transform:uppercase;border-bottom:1px solid #e9edf4;background:#f9fbfd}.points-table td,.data-table td{padding:15px 12px;font-size:12px;border-bottom:1px solid #eef1f6;font-weight:700}.points-table tr:last-child td,.data-table tr:last-child td{border-bottom:none}.points-table tr:first-child td:first-child{border-left:3px solid #a3e447}.team-cell{display:flex;align-items:center;gap:9px;min-width:0}.team-cell .team-crest{width:29px;height:29px;font-size:13px;border-radius:8px}.team-cell span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.points-table .pts{font-weight:900;color:#182746}.points-table td:first-child{color:#8491a6}.standings-wrap,.table-scroll{overflow-x:auto}.points-table{min-width:520px}.standings-wrap.compact .points-table{min-width:0}.highlight-box{background:linear-gradient(120deg,#effbdb,#f7fbe9);padding:19px 20px;border-radius:15px;border:1px solid #dcf3ba;margin:20px}.highlight-box strong{font-size:13px;color:#253d1b;display:block}.highlight-box p{font-size:11px;color:#617b52;margin:6px 0 0;line-height:1.6}.schedule-stack{display:grid;gap:10px}.schedule-row{padding:15px;border:1px solid #e7ebf3;border-radius:13px;background:#fff;display:flex;align-items:center;gap:12px}.schedule-date{width:60px;flex-shrink:0;border-right:1px solid #e8edf3;text-align:center;padding-right:12px}.schedule-date strong{display:block;font:900 25px 'Barlow Condensed',sans-serif}.schedule-date small{font-size:10px;color:#8290a7;text-transform:uppercase;font-weight:900}.schedule-detail{flex:1;min-width:0}.schedule-detail b{font-size:12px;display:block}.schedule-detail span{color:#8090a8;font-size:10px;display:block;margin-top:5px}.team-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px}.team-tile{background:white;border:1px solid #e5eaf2;border-radius:16px;padding:24px 20px;display:flex;gap:13px;align-items:center;box-shadow:var(--shadow)}.team-tile .team-crest{width:56px;height:56px;font-size:24px}.team-tile b{font:900 21px 'Barlow Condensed',sans-serif;text-transform:uppercase;display:block}.team-tile small{font-size:11px;color:#8796ad;display:block;margin-top:4px}.page-heading{margin-bottom:24px}.page-heading h1{font-size:46px}.page-heading p{max-width:600px}.filter-bar{display:flex;align-items:center;gap:9px;margin-bottom:20px;flex-wrap:wrap}.filter-bar button{border:1px solid #dce4f0;background:white;color:#6e7c94;border-radius:9px;padding:11px 16px;font-size:12px;font-weight:900}.filter-bar button.selected{background:#132341;color:white;border-color:#132341}.empty{padding:48px 20px;text-align:center;color:#8392ab;font-size:13px}.empty .big{font-size:32px;margin-bottom:12px}.ranking-header{background:linear-gradient(110deg,#14233c,#243954);color:white;padding:23px 24px;display:flex;justify-content:space-between;align-items:center}.ranking-header h3{margin:0;font:900 25px 'Barlow Condensed',sans-serif;text-transform:uppercase}.ranking-header span{font-size:10px;color:#b8d68a;letter-spacing:1px;font-weight:900}.rank-num{font:900 22px 'Barlow Condensed',sans-serif;color:#46546e}.rank-points{font:900 22px 'Barlow Condensed',sans-serif}.stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}.stat-card{padding:20px;border-radius:16px;background:white;border:1px solid #e4e9f3;box-shadow:var(--shadow)}.stat-card b{font:900 31px 'Barlow Condensed',sans-serif;display:block}.stat-card span{font-size:10px;letter-spacing:1px;color:#8190a7;font-weight:800;text-transform:uppercase}.banner{background:linear-gradient(115deg,#172641,#203951);border-radius:18px;color:white;padding:26px;display:flex;justify-content:space-between;gap:12px;align-items:center;margin-top:35px}.banner h3{font:900 26px 'Barlow Condensed',sans-serif;margin:0 0 7px}.banner p{font-size:12px;color:#b5c4d7;margin:0}.footer{background:#0a1224;padding:38px 0;color:#8f9fb9;font-size:12px}.footer-in{display:flex;justify-content:space-between;align-items:center;gap:12px}.footer strong{font:900 23px 'Barlow Condensed',sans-serif;letter-spacing:1px;color:var(--lime)}.footer p{margin:6px 0 0}.footer .made{color:#70819e}.admin-shell{display:grid;grid-template-columns:220px minmax(0,1fr);gap:24px;align-items:start}.admin-menu{display:grid;gap:6px;padding:13px;background:#101e37;border-radius:17px}.admin-menu button{border:0;background:transparent;color:#b5c4db;text-align:left;padding:13px 15px;border-radius:9px;font-size:12px;font-weight:800}.admin-menu button.active,.admin-menu button:hover{background:#c6fb63;color:#101a2c}.admin-main{min-width:0}.admin-header{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:19px}.admin-header h2{font:900 29px 'Barlow Condensed',sans-serif;margin:0}.form-card{background:#fff;border:1px solid #e1e7f0;border-radius:16px;padding:22px;margin-bottom:17px}.form-card h3{font:900 22px 'Barlow Condensed',sans-serif;margin:0 0 6px}.form-card>p{color:#7c8aa0;font-size:12px;margin:0 0 20px;line-height:1.6}.form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}.form-grid .wide{grid-column:1/-1}.field{display:flex;flex-direction:column;gap:7px}.field label{font-size:11px;color:#66748c;font-weight:900}.field input,.field select,.field textarea{border:1px solid #dce3ed;border-radius:9px;background:#fafbfd;outline:none;color:#1d2d46;padding:11px 12px;width:100%;min-width:0;font-size:13px}.field input:focus,.field select:focus,.field textarea:focus{border-color:#84bf34;box-shadow:0 0 0 3px #d0f1a46a}.field textarea{min-height:78px;resize:vertical}.form-actions{margin-top:18px;display:flex;gap:10px;flex-wrap:wrap}.admin-list{display:grid;gap:8px}.admin-list-item{border:1px solid #e9edf4;padding:13px 15px;border-radius:10px;display:flex;justify-content:space-between;align-items:center;gap:12px}.admin-list-item strong{font-size:12px}.admin-list-item small{display:block;font-size:10px;color:#8a98ad;margin-top:4px}.admin-list-item .controls{display:flex;gap:6px;flex-shrink:0}.tiny-btn{padding:7px 9px;border:1px solid #dae3ee;color:#375078;background:#fff;border-radius:7px;font-size:11px;font-weight:800}.tiny-btn.danger{color:#ca5d55}.login-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:stretch;max-width:900px;margin:34px auto}.login-art{background:linear-gradient(135deg,#0d1a32,#294267);color:white;border-radius:18px;padding:40px;display:flex;flex-direction:column;justify-content:center;min-height:330px}.login-art .lock{font-size:38px}.login-art h2{font:900 42px 'Barlow Condensed',sans-serif;margin:16px 0 9px;text-transform:uppercase}.login-art p{font-size:13px;color:#adbed7;line-height:1.7}.login-card{background:white;padding:37px;border:1px solid #e1e6ef;border-radius:18px}.login-card h3{font:900 28px 'Barlow Condensed',sans-serif;text-transform:uppercase;margin:0 0 8px}.login-card p{font-size:12px;color:#798aa2;line-height:1.6}.login-card .field{margin:18px 0}.alert{border:1px solid #f0d8a8;background:#fff8ea;color:#8f6731;border-radius:11px;padding:12px 14px;font-size:12px;line-height:1.7;margin:16px 0}.alert.error{border-color:#f7cecb;background:#fff2f2;color:#aa4742}.alert.ok{border-color:#c9e6bb;background:#f3fcea;color:#416f30}.notice{font-size:12px;color:#71839b}.title-icon{display:inline-block;background:#e9f7d5;color:#538318;padding:8px;border-radius:9px;margin-right:8px}.loading{opacity:.55;pointer-events:none}.hide{display:none!important}.form-card .hint{color:#96a0b0;font-size:11px;margin-top:8px}.mobile-nav-overlay{display:none}
+@media(max-width:1080px){.brand{min-width:180px}.top-inner{gap:10px}.nav{gap:0}.nav button{padding:10px}.hero-in{gap:30px}.team-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:800px){.container{width:min(100% - 32px,650px)}.topbar{height:67px}.brand{min-width:auto;flex:1}.brand-txt b{font-size:18px}.nav{display:none;position:absolute;top:67px;left:0;right:0;background:#111d34;padding:14px 17px;box-shadow:0 15px 30px #07112688;flex-direction:column;align-items:stretch}.nav.open{display:flex}.nav button{text-align:left;padding:13px}.top-actions .btn{display:none}.menu-btn{display:block}.hero-in{grid-template-columns:1fr;min-height:auto;gap:20px;padding:48px 0 40px}.hero h1{font-size:67px;max-width:570px}.hero-panel{max-width:520px;width:100%;margin:8px auto 0}.metrics{grid-template-columns:repeat(2,1fr)}.metric{padding-left:14px;padding-top:16px;padding-bottom:16px}.metric:first-child{padding-left:14px}.metric:nth-child(2){border-right:0}.metric:nth-child(-n+2){border-bottom:1px solid #35445c}.layout-two{grid-template-columns:1fr}.main{padding:35px 0 55px}.team-grid{grid-template-columns:repeat(2,1fr)}.admin-shell{grid-template-columns:1fr}.admin-menu{display:flex;overflow-x:auto}.admin-menu button{white-space:nowrap}.login-grid{grid-template-columns:1fr}.login-art{min-height:210px;padding:30px}.login-card{padding:28px}.banner{flex-direction:column;align-items:flex-start}.footer-in{flex-direction:column;align-items:flex-start}}
+@media(max-width:520px){.hero h1{font-size:53px}.hero-in{padding-top:37px}.hero p{font-size:13px}.feature-card{padding:16px}.feature-team strong{font-size:16px}.feature-team .team-crest{width:52px;height:52px}.feature-versus{grid-template-columns:1fr 30px 1fr}.metrics{grid-template-columns:repeat(2,1fr)}.metric-icon{width:36px;height:36px}.metric strong{font-size:23px}.metric span{font-size:9px}.team-grid{grid-template-columns:1fr}.match-card{padding:15px 12px}.match-side{gap:6px}.match-side .team-crest{width:31px;height:31px;font-size:14px}.match-side strong{font-size:11px;white-space:normal;overflow:visible;line-height:1.15}.match-side small{font-size:9px}.match-side .mobile-score{display:block!important;font-size:15px;color:#192744;font-weight:900;margin-top:5px}.match-center .desktop-score{display:none}.match-center .mobile-vs{display:block!important}.score-num{font-size:19px}.section-head h2,.page-heading h1{font-size:32px}.form-grid{grid-template-columns:1fr}.section-head{align-items:flex-start}.banner{margin-top:23px}.team-tile{padding:17px}.admin-header{flex-direction:column;align-items:flex-start}}
+
+/* JPCL mobile navigation and announcements */
+@media (min-width:801px){.nav .mobile-admin-link{display:none}}
+@media (max-width:800px){.nav .mobile-admin-link{display:block;background:#c6fb63;color:#12203b;font-weight:900;margin-top:7px;text-align:center}}
+@media (max-width:520px){.brand-txt small{font-size:8px;letter-spacing:.55px;max-width:240px}.brand-txt b{font-size:21px}}
+.jpcl-announcement{margin:18px 0 0;padding:17px 19px;border:1px solid #bde76e;border-radius:12px;background:#eaf5d4;color:#16351d;font-size:14px;line-height:1.6}.jpcl-announcement b{margin-right:10px}
+
+/* JPCL: keep administrator access visible on phones without opening the hamburger menu. */
+@media (max-width:800px){
+  .top-actions .btn{display:inline-flex;white-space:nowrap;flex-shrink:0;font-size:11px;padding:9px 10px}
+  .top-inner{gap:10px}
+  .brand{min-width:0;overflow:hidden}
+  .brand-txt{min-width:0}
+  .brand-txt small{letter-spacing:.5px;font-size:8px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:155px}
+}
+@media (max-width:380px){
+  .brand-txt small{display:none}
+  .top-actions{gap:5px}
+  .top-actions .btn{font-size:10px;padding:8px}
+  .menu-btn{padding:8px}
+}
+
+  </style>
 </head>
 <body>
-  <div id="app"><div class="boot">Loading tournament hub…</div></div>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js" defer></script>
-  <script src="config.js" defer></script>
-  <script src="app.js" defer></script>
+  <div id="app"><div class="boot">Loading JPCL tournament hub…</div></div>
+  <!-- Public client library and publishable key only; no secret or service-role credentials. -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  <script>window.JPCL_CONFIG = {"name":"Jadugar Paltalk Cricket League","shortName":"JPCL","season":"SEASON 01","tagline":"Official Tournament Hub","announcement":"","supabaseUrl":"https://gtejszzykjzogryxtkng.supabase.co","supabaseAnonKey":"sb_publishable_UaeSuItVM2PnkGGWxDYL4A_jsvJP9Zk"};</script>
+  <script>
+(() => {
+  'use strict';
+  const cfg = window.JPCL_CONFIG || {};
+  const state={page:'overview', matchFilter:'all', adminTab:'results', menu:false, mode:'loading', admin:false, session:null, selectedMatchId:'', editTeamId:'', flash:'', flashType:'ok', teams:[], matches:[], players:[], player_performances:[]};
+  let db=null;
+  const $=id=>document.getElementById(id);
+  const e = v => String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const safeColor=v=>/^#[0-9A-Fa-f]{6}$/.test(v||'')?v:'#c6fb63';
+  const team=id=>state.teams.find(t=>t.id===id)||{name:'Unknown team',short_name:'?',color:'#ddd'};
+  const sortedMatches=()=>[...state.matches].sort((a,b)=>{
+    if(a.scheduled_at&&b.scheduled_at) return new Date(a.scheduled_at)-new Date(b.scheduled_at);
+    return (a.created_at||'').localeCompare(b.created_at||'');
+  });
+  const completed=()=>sortedMatches().filter(m=>m.status==='completed').reverse();
+  const upcoming=()=>sortedMatches().filter(m=>m.status==='upcoming'||m.status==='live');
+  const dateLabel=v=>v?new Date(v).toLocaleDateString(undefined,{month:'short',day:'numeric',year:'numeric'}):'Date TBA';
+  const dayLabel=v=>v?new Date(v).toLocaleDateString(undefined,{day:'2-digit'}):'--';
+  const monthLabel=v=>v?new Date(v).toLocaleDateString(undefined,{month:'short'}):'TBA';
+  const timeLabel=v=>v?new Date(v).toLocaleTimeString(undefined,{hour:'numeric',minute:'2-digit'}):'Time TBA';
+  const score=(m,n)=>m[`team${n}_runs`]==null?'—':`${m[`team${n}_runs`]}/${m[`team${n}_wickets`]??0}`;
+  const initials=s=>String(s||'').split(/\s+/).map(x=>x[0]).slice(0,3).join('').toUpperCase();
+  const crest=(t,cls='')=>`<div class="team-crest ${cls}" style="--team-color:${safeColor(t.color)}">${e(t.short_name||initials(t.name))}</div>`;
+  const stats=()=>{
+    const rows=state.teams.map(t=>({team:t,played:0,won:0,lost:0,tied:0,points:0}));
+    for(const m of completed()){
+      const a=rows.find(x=>x.team.id===m.team1_id),b=rows.find(x=>x.team.id===m.team2_id);
+      if(!a||!b)continue;
+      a.played++;b.played++;
+      if(m.winner_id===a.team.id){a.won++;a.points+=2;b.lost++;}
+      else if(m.winner_id===b.team.id){b.won++;b.points+=2;a.lost++;}
+      else{a.tied++;b.tied++;a.points++;b.points++;}
+    }
+    return rows.sort((a,b)=>b.points-a.points||b.won-a.won||a.team.name.localeCompare(b.team.name));
+  };
+  const playerStats=()=>state.players.map(p=>{
+    const perf=state.player_performances.filter(x=>x.player_id===p.id);
+    return {player:p,matches:perf.length,runs:perf.reduce((a,x)=>a+(x.runs||0),0),wickets:perf.reduce((a,x)=>a+(x.wickets||0),0),catches:perf.reduce((a,x)=>a+(x.catches||0),0)};
+  });
+  const header=()=>`<header class="topbar"><div class="container top-inner">
+    <a class="brand" href="#overview" data-page="overview"><div class="brand-mark"><span>${e((cfg.shortName||'JPCL').slice(0,2))}</span></div><div class="brand-txt"><b>${e(cfg.shortName||'JPCL')}</b><small>${e(cfg.name||'Jadugar Paltalk Cricket League').toUpperCase()}</small></div></a>
+    <nav class="nav ${state.menu?'open':''}" aria-label="Main navigation">${[['overview','Home'],['matches','Matches'],['standings','Points Table'],['teams','Teams'],['players','Player Stats']].map(([id,label])=>`<button data-page="${id}" class="${state.page===id?'active':''}">${label}</button>`).join('')}<button class="mobile-admin-link" data-page="admin">${state.admin?'⚙ Admin Dashboard':'🔐 Admin Login'}</button></nav>
+    <div class="top-actions"><button class="btn ${state.page==='admin'?'primary':'glass'} small" data-page="admin">${state.admin?'⚙ Dashboard':'⇥ Admin Login'}</button><button class="menu-btn" data-action="toggle-menu" aria-label="Toggle navigation">☰</button></div>
+    </div></header>${state.mode==='error'?`<div class="demo-ribbon">Tournament results are temporarily unavailable. Please refresh this page.</div>`:state.mode==='loading'?`<div class="demo-ribbon">Loading JPCL tournament information…</div>`:''}`;
+  const footer=()=>`<footer class="footer"><div class="container footer-in"><div><strong>${e(cfg.shortName||'JPCL')}.</strong><p>${e(cfg.tagline||'Official Tournament Hub')} · ${e(cfg.season||'SEASON 01')}</p></div><span class="made">Made for your tournament. Managed by you.</span></div></footer>`;
+  const feature=()=>{
+    const m=upcoming()[0]||completed()[0],a=m?team(m.team1_id):null,b=m?team(m.team2_id):null;
+    if(!m)return `<div class="feature-card"><div class="micro">THE MATCH CENTER</div><div class="empty" style="color:#dbe6f5"><div class="big">🏏</div>Add your first fixture to get started</div></div>`;
+    return `<div class="panel-glow"></div><div class="feature-card"><div class="feature-top"><span class="micro">${e(m.stage||'THE MATCH CENTER')}</span><span class="pill ${m.status==='live'?'red':'lime'}">${m.status==='completed'?'FINAL':m.status==='live'?'● LIVE':'● UPCOMING'}</span></div>
+    <div class="feature-versus"><div class="feature-team">${crest(a)}<strong>${e(a.name)}</strong><small>${m.status==='completed'?e(score(m,1)):'READY TO PLAY'}</small></div><span class="vs">VS</span><div class="feature-team">${crest(b)}<strong>${e(b.name)}</strong><small>${m.status==='completed'?e(score(m,2)):'READY TO PLAY'}</small></div></div>
+    <div class="feature-footer"><span>◷ ${e(dateLabel(m.scheduled_at))} · ${e(timeLabel(m.scheduled_at))}</span><strong>${m.status==='completed'?'MATCH RESULT':'MATCHDAY'} ↗</strong></div></div>`;
+  };
+  const metrics=()=>`<div class="container metrics">${[['▦',state.teams.length,'Teams'],['⚑',state.matches.length,'Total matches'],['✓',completed().length,'Completed'],['◷',upcoming().length,'To play']].map(([i,n,l])=>`<div class="metric"><div class="metric-icon">${i}</div><div><strong>${n}</strong><span>${l}</span></div></div>`).join('')}</div>`;
+  const matchCard=m=>{
+    const a=team(m.team1_id),b=team(m.team2_id),done=m.status==='completed';
+    return `<article class="match-card"><div class="match-card-head"><span class="match-meta">${e(m.stage||'League match')} · ${e(dateLabel(m.scheduled_at))}</span><span class="pill ${done?'gray':m.status==='live'?'red':'lime'}">${done?'Final':m.status==='live'?'Live':'Upcoming'}</span></div>
+      <div class="match-line"><div class="match-side">${crest(a)}<div><strong>${e(a.name)}</strong><small>${done?(m.winner_id===a.id?'Winner':'Completed'):e(a.short_name)}</small>${done?`<small class="mobile-score">${e(score(m,1))}</small>`:''}</div></div><div class="match-center">${done?`<span class="score-num desktop-score">${e(score(m,1))} <span style="color:#b2bbc9">:</span> ${e(score(m,2))}</span><b class="mobile-vs">:</b>`:'<b>VS</b>'}</div><div class="match-side">${crest(b)}<div><strong>${e(b.name)}</strong><small>${done?(m.winner_id===b.id?'Winner':'Completed'):e(b.short_name)}</small>${done?`<small class="mobile-score">${e(score(m,2))}</small>`:''}</div></div></div>
+      <div class="match-summary">${done?e(m.result_summary||'Result recorded'):(m.status==='live'?'Match in progress':'◷ '+e(timeLabel(m.scheduled_at)))}</div></article>`;
+  };
+  const tableMarkup=(rows=stats(),compact=false)=>`<div class="standings-wrap ${compact?'compact':''}"><table class="points-table"><thead><tr><th>#</th><th>Team</th><th>P</th><th>W</th>${compact?'':'<th>L</th><th>T</th>'}<th>PTS</th></tr></thead><tbody>${rows.map((r,i)=>`<tr><td>${i+1}</td><td><div class="team-cell">${crest(r.team)}<span>${e(r.team.name)}</span></div></td><td>${r.played}</td><td>${r.won}</td>${compact?'':`<td>${r.lost}</td><td>${r.tied}</td>`}<td class="pts">${r.points}</td></tr>`).join('')||`<tr><td colspan="${compact?5:7}" class="empty">Add teams to start the points table</td></tr>`}</tbody></table></div>`;
+  const section=(kick,title,right='')=>`<div class="section-head"><div><div class="kicker">${e(kick)}</div><h2>${e(title)}</h2></div>${right}</div>`;
+  const empty=(msg='Nothing here yet')=>`<div class="empty"><div class="big">🏏</div>${e(msg)}</div>`;
+  const scheduleRow=m=>{const a=team(m.team1_id),b=team(m.team2_id);return `<div class="schedule-row"><div class="schedule-date"><strong>${dayLabel(m.scheduled_at)}</strong><small>${monthLabel(m.scheduled_at)}</small></div><div class="schedule-detail"><b>${e(a.short_name)} vs ${e(b.short_name)}</b><span>${e(m.stage||'League match')} · ${e(timeLabel(m.scheduled_at))}</span></div><span class="pill ${m.status==='live'?'red':'gray'}">${m.status==='live'?'Live':'Scheduled'}</span></div>`};
+  const home=()=>`<section class="hero"><div class="container hero-in"><div><div class="eyebrow">${e(cfg.season||'SEASON 01')} · ONLINE CRICKET</div><h1>EVERY RUN.<br>EVERY RIVALRY.<br><em>EVERY RESULT.</em></h1><p>One place for every fixture, every final score, and every team in the JPCL tournament. The competition never stops.</p><div class="hero-buttons"><button class="btn primary" data-page="matches">Explore matches <span>↗</span></button><button class="btn glass" data-page="standings">View points table →</button></div></div><div class="hero-panel">${feature()}</div></div>${metrics()}${cfg.announcement?`<div class="container"><div class="jpcl-announcement"><b>JPCL announcement</b> ${e(cfg.announcement)}</div></div>`:''}</section>
+    <main class="main"><div class="container"><div class="layout-two"><div>${section('The action','Recent results',`<button class="view-all" data-page="matches">ALL MATCHES ↗</button>`)}<div class="match-list">${completed().slice(0,3).map(matchCard).join('')||empty('No completed matches yet')}</div></div><div>${section('The race','League standings',`<button class="view-all" data-page="standings">FULL TABLE ↗</button>`)}<div class="card">${tableMarkup(stats().slice(0,6),true)}<div class="highlight-box"><strong>🏆 Road to the top</strong><p>Standings update automatically when you save a completed match result.</p></div></div></div></div>
+    <div class="section-gap">${section('Coming up','Next fixtures',`<button class="view-all" data-page="matches">VIEW SCHEDULE ↗</button>`)}<div class="schedule-stack">${upcoming().slice(0,3).map(scheduleRow).join('')||empty('Fixtures will appear here soon')}</div></div>
+    ${banner()}</div></main>`;
+  const banner=()=>`<div class="banner"><div><h3>YOUR TOURNAMENT. YOUR SCOREBOARD.</h3><p>Scores and results are entered by your league admin. Updates appear as soon as they are saved.</p></div><button class="btn primary" data-page="admin">Manage results ↗</button></div>`;
+  const matchesPage=()=>`<main class="main"><div class="container"><div class="page-heading"><div class="kicker">The match centre</div><h1>FIXTURES & RESULTS</h1><p>Match schedules, official scores, and results published by the tournament admin.</p></div><div class="filter-bar">${[['all','All matches'],['upcoming','Upcoming'],['completed','Results'],['live','Live']].map(([k,v])=>`<button data-filter="${k}" class="${state.matchFilter===k?'selected':''}">${v}</button>`).join('')}</div><div class="match-list">${sortedMatches().filter(m=>state.matchFilter==='all'||(state.matchFilter==='upcoming'?['upcoming','live'].includes(m.status):m.status===state.matchFilter)).map(matchCard).join('')||empty('No matches in this category')}</div>${banner()}</div></main>`;
+  const standingsPage=()=>`<main class="main"><div class="container"><div class="page-heading"><div class="kicker">League rankings</div><h1>THE POINTS TABLE</h1><p>Win = 2 points. Tie or no winner = 1 point each. Rankings update automatically from completed results.</p></div><div class="card">${tableMarkup()}</div><div class="highlight-box" style="margin:17px 0 0"><strong>How it works</strong><p>Played (P), Won (W), Lost (L), Tied / No winner (T), and Points (PTS). Teams tied on points are ordered by wins, then name. Custom league rules can be added later.</p></div>${banner()}</div></main>`;
+  const teamsPage=()=>`<main class="main"><div class="container"><div class="page-heading"><div class="kicker">Meet the competitors</div><h1>OUR TEAMS</h1><p>Meet the teams competing for the JPCL title.</p></div><div class="team-grid">${state.teams.map(t=>`<div class="team-tile">${crest(t)}<div><b>${e(t.name)}</b><small>${e(t.short_name)} · ${state.players.filter(p=>p.team_id===t.id).length} player(s)</small></div></div>`).join('')||empty('Teams will appear here')}</div>${banner()}</div></main>`;
+  const ranking=(field,label)=>{const rows=playerStats().sort((a,b)=>b[field]-a[field]||a.player.name.localeCompare(b.player.name));return `<div class="card"><div class="ranking-header"><h3>${e(label)}</h3><span>${field==='runs'?'RUNS':'WICKETS'}</span></div><div class="table-scroll"><table class="data-table"><thead><tr><th>Rank</th><th>Player</th><th>Team</th><th>${field==='runs'?'Runs':'Wkts'}</th></tr></thead><tbody>${rows.slice(0,10).map((r,i)=>`<tr><td class="rank-num">${String(i+1).padStart(2,'0')}</td><td>${e(r.player.name)}</td><td>${e(team(r.player.team_id).short_name)}</td><td class="rank-points">${r[field]}</td></tr>`).join('')||'<tr><td colspan="4">No player statistics yet</td></tr>'}</tbody></table></div></div>`};
+  const playersPage=()=>`<main class="main"><div class="container"><div class="page-heading"><div class="kicker">The individual battles</div><h1>PLAYER LEADERBOARDS</h1><p>Track runs and wickets entered by the tournament admin. Rankings reflect saved match performances.</p></div><div class="layout-two">${ranking('runs','Top run scorers')}${ranking('wickets','Top wicket takers')}</div><div class="section-gap">${section('Meet the squad','Registered players')}<div class="card table-scroll"><table class="data-table"><thead><tr><th>Player</th><th>Team</th><th>Matches</th><th>Runs</th><th>Wickets</th></tr></thead><tbody>${playerStats().map(p=>`<tr><td>${e(p.player.name)}</td><td>${e(team(p.player.team_id).name)}</td><td>${p.matches}</td><td>${p.runs}</td><td>${p.wickets}</td></tr>`).join('')||'<tr><td colspan="5">No players yet</td></tr>'}</tbody></table></div></div></div></main>`;
+  const optionTeams=(selected='')=>`<option value="">Select team</option>${state.teams.map(t=>`<option value="${e(t.id)}" ${t.id===selected?'selected':''}>${e(t.name)}</option>`).join('')}`;
+  const optionMatches=(selected='')=>`<option value="">Select match</option>${sortedMatches().map(m=>`<option value="${e(m.id)}" ${m.id===selected?'selected':''}>${e(team(m.team1_id).short_name)} vs ${e(team(m.team2_id).short_name)} · ${e(m.stage||'Match')}</option>`).join('')}`;
+  const field=(label,name,value='',type='text',more='')=>`<div class="field"><label for="f-${e(name)}">${e(label)}</label><input id="f-${e(name)}" name="${e(name)}" type="${e(type)}" value="${e(value)}" ${more}></div>`;
+  const selectField=(label,name,opts)=>`<div class="field"><label for="f-${e(name)}">${e(label)}</label><select id="f-${e(name)}" name="${e(name)}">${opts}</select></div>`;
+  const formBtn=label=>`<div class="form-actions"><button type="submit" class="btn primary">${e(label)} ↗</button></div>`;
+  const alertMarkup=()=>state.flash?`<div role="status" class="alert ${state.flashType==='error'?'error':'ok'}">${e(state.flash)}</div>`:'';
+  const login=()=>`<main class="main"><div class="container"><div class="page-heading"><div class="kicker">Administrator access</div><h1>ADMIN LOGIN</h1><p>Sign in to manage JPCL scores, teams, fixtures, and rankings.</p></div><div class="login-grid"><div class="login-art"><div class="lock">🔐</div><h2>YOU RUN<br>THE SHOW.</h2><p>Enter scores after each match finishes. The public tournament website updates as soon as you save.</p></div><div class="login-card"><h3>Welcome back.</h3><p>Use your JPCL admin email and password.</p>${alertMarkup()}${!db?'<div class="alert">Admin login is temporarily unavailable. Please refresh this page.</div>':''}<form id="login-form">${field('Admin email','email','','email','required autocomplete="email"')}${field('Password','password','','password','required autocomplete="current-password"')}${formBtn('Sign in securely')}</form></div></div></div></main>`;
+  const adminResults=()=>{
+    const m=state.matches.find(x=>x.id===state.selectedMatchId)||state.matches[0];
+    if(m&&!state.selectedMatchId)state.selectedMatchId=m.id;
+    return `<div class="form-card"><h3>Update match scores</h3><p>Select a fixture, enter the final numbers, choose the winner, then publish.</p>
+       ${selectField('Select a match','pick_match',optionMatches(state.selectedMatchId))}
+       ${m?`<form id="results-form"><input type="hidden" name="match_id" value="${e(m.id)}"><div class="form-grid" style="margin-top:15px">
+         ${field(`${team(m.team1_id).short_name} runs`,'team1_runs',m.team1_runs??'','number','min="0" max="9999"')}
+         ${field(`${team(m.team1_id).short_name} wickets`,'team1_wickets',m.team1_wickets??'','number','min="0" max="10"')}
+         ${field(`${team(m.team2_id).short_name} runs`,'team2_runs',m.team2_runs??'','number','min="0" max="9999"')}
+         ${field(`${team(m.team2_id).short_name} wickets`,'team2_wickets',m.team2_wickets??'','number','min="0" max="10"')}
+         ${selectField('Match status','status', ['upcoming','live','completed'].map(s=>`<option ${m.status===s?'selected':''} value="${s}">${s.charAt(0).toUpperCase()+s.slice(1)}</option>`).join(''))}
+         ${selectField('Winner','winner_id',`<option value="">Tie / no winner / undecided</option><option ${m.winner_id===m.team1_id?'selected':''} value="${e(m.team1_id)}">${e(team(m.team1_id).name)}</option><option ${m.winner_id===m.team2_id?'selected':''} value="${e(m.team2_id)}">${e(team(m.team2_id).name)}</option>`)}
+         <div class="wide">${field('Result summary (shown publicly)','result_summary',m.result_summary||'','text','placeholder="e.g. Team A won by 6 runs"')}</div>
+       </div>${formBtn('Save and publish result')}</form>`:'<div class="alert">Add a match under the Fixtures tab first.</div>'}</div>`;
+  };
+  const adminFixtures=()=>`<div class="form-card"><h3>Add a new fixture</h3><p>Schedule a match for two teams, or leave the date blank to announce it later.</p><form id="match-form"><div class="form-grid">${selectField('Team A','team1_id',optionTeams())}${selectField('Team B','team2_id',optionTeams())}${field('Match stage / round','stage','League match','text','required maxlength="80"')}${field('Date and time (optional)','scheduled_at','','datetime-local')}</div>${formBtn('Add fixture')}</form></div><div class="form-card"><h3>Existing fixtures</h3><p>Choose Edit result to score a match.</p><div class="admin-list">${sortedMatches().map(m=>`<div class="admin-list-item"><div><strong>${e(team(m.team1_id).short_name)} vs ${e(team(m.team2_id).short_name)}</strong><small>${e(m.stage)} · ${e(m.status)} · ${e(dateLabel(m.scheduled_at))}</small></div><div class="controls"><button class="tiny-btn" data-edit-match="${e(m.id)}">Edit result</button><button class="tiny-btn danger" data-delete-match="${e(m.id)}">Delete</button></div></div>`).join('')||'<div class="notice">No matches yet</div>'}</div></div>`;
+  const adminTeams=()=>{
+    const t=state.teams.find(t=>t.id===state.editTeamId);
+    return `<div class="form-card"><h3>${t?'Edit team':'Add a new team'}</h3><p>Choose the short code and colour displayed on fixtures and standings.</p><form id="team-form"><div class="form-grid">${field('Team name','name',t?.name||'','text','required maxlength="70"')}${field('Short code (2–5 letters)','short_name',t?.short_name||'','text','required minlength="2" maxlength="5"')}${field('Team colour','color',t?.color||'#c6fb63','color')}</div>${formBtn(t?'Save team changes':'Add team')}</form>${t?'<button class="tiny-btn" style="margin-top:12px" data-action="cancel-edit-team">Cancel edit</button>':''}</div><div class="form-card"><h3>Teams (${state.teams.length})</h3><p>You can delete teams only if they are not used by existing matches.</p><div class="admin-list">${state.teams.map(t=>`<div class="admin-list-item"><div class="team-cell">${crest(t)}<div><strong>${e(t.name)}</strong><small>${e(t.short_name)}</small></div></div><div class="controls"><button class="tiny-btn" data-edit-team="${e(t.id)}">Edit</button><button class="tiny-btn danger" data-delete-team="${e(t.id)}">Delete</button></div></div>`).join('')||'<div class="notice">Add your first team</div>'}</div></div>`;
+  };
+  const adminPlayers=()=>`<div class="form-card"><h3>Add a player</h3><p>Register players for leaderboards and match statistics.</p><form id="player-form"><div class="form-grid">${field('Player name','name','','text','required maxlength="70"')}${selectField('Team','team_id',optionTeams())}${field('Role (optional)','role','Player','text','maxlength="40"')}</div>${formBtn('Add player')}</form></div><div class="form-card"><h3>Registered players (${state.players.length})</h3><div class="admin-list">${state.players.map(p=>`<div class="admin-list-item"><div><strong>${e(p.name)}</strong><small>${e(team(p.team_id).name)} · ${e(p.role)}</small></div><button class="tiny-btn danger" data-delete-player="${e(p.id)}">Delete</button></div>`).join('')||'<div class="notice">No players yet</div>'}</div></div>`;
+  const adminStats=()=>`<div class="form-card"><h3>Player performance</h3><p>Enter or correct a player's numbers for a match. Saving the same player and match updates the existing record.</p><form id="stat-form"><div class="form-grid">${selectField('Match','match_id',optionMatches())}${selectField('Player','player_id',`<option value="">Select player</option>${state.players.map(p=>`<option value="${e(p.id)}">${e(p.name)} (${e(team(p.team_id).short_name)})</option>`).join('')}`)}${field('Runs','runs',0,'number','required min="0"')}${field('Wickets','wickets',0,'number','required min="0" max="10"')}${field('Catches','catches',0,'number','required min="0" max="10"')}</div>${formBtn('Save player numbers')}</form></div><div class="form-card"><h3>Saved performances</h3><div class="admin-list">${state.player_performances.map(r=>{const p=state.players.find(p=>p.id===r.player_id);return `<div class="admin-list-item"><div><strong>${e(p?.name||'Player')} · ${e(team(p?.team_id).short_name)}</strong><small>${e(state.matches.find(m=>m.id===r.match_id)?.stage||'Match')} · ${r.runs} runs · ${r.wickets} wickets</small></div><button class="tiny-btn danger" data-delete-stat="${e(r.id)}">Delete</button></div>`}).join('')||'<div class="notice">No stats added</div>'}</div></div>`;
+  const adminSettings=()=>`<div class="form-card"><h3>Website settings</h3><p>Change the public tournament name, season and announcement. Click Save — no coding required.</p><form id="settings-form"><div class="form-grid">${field('Full tournament name','name',cfg.name||'Jadugar Paltalk Cricket League','text','required maxlength="90"')}${field('Short name','short_name',cfg.shortName||'JPCL','text','required maxlength="12"')}${field('Season','season',cfg.season||'SEASON 01','text','maxlength="40"')}${field('Tagline','tagline',cfg.tagline||'Official Tournament Hub','text','maxlength="140"')}<div class="wide">${field('Announcement (optional)','announcement',cfg.announcement||'','text','maxlength="240" placeholder="News you want to show on the homepage"')}</div></div>${formBtn('Save website settings')}</form></div>`;
+  const adminPage=()=>!state.admin?login():`<main class="main"><div class="container"><div class="page-heading"><div class="kicker">Tournament control centre</div><h1>ADMIN DASHBOARD</h1><p>Manage results, fixtures, teams, and player performances. Changes publish to the public pages.</p></div>${alertMarkup()}<div class="stat-grid" style="margin-bottom:24px">${[['Teams',state.teams.length],['Matches',state.matches.length],['Completed',completed().length]].map(([k,v])=>`<div class="stat-card"><b>${v}</b><span>${k}</span></div>`).join('')}</div><div class="admin-shell"><div class="admin-menu">${[['results','🏏 Match results'],['fixtures','▦ Fixtures'],['teams','⚑ Teams'],['players','♙ Players'],['stats','◈ Player stats'],['settings','⚙ Site settings']].map(([k,v])=>`<button data-admin-tab="${k}" class="${state.adminTab===k?'active':''}">${v}</button>`).join('')}<button data-action="logout">⇤ Sign out</button></div><div class="admin-main"><div class="admin-header"><h2>${e(({results:'MATCH RESULTS',fixtures:'FIXTURES',teams:'TEAMS',players:'PLAYERS',stats:'PLAYER STATS',settings:'SITE SETTINGS'})[state.adminTab])}</h2><span class="pill gray">ADMIN ONLY</span></div>${({results:adminResults,fixtures:adminFixtures,teams:adminTeams,players:adminPlayers,stats:adminStats,settings:adminSettings})[state.adminTab]()}</div></div></div></main>`;
+  function render(){
+    const pages={overview:home,matches:matchesPage,standings:standingsPage,teams:teamsPage,players:playersPage,admin:adminPage};
+    document.title=`${cfg.shortName||'JPCL'} | ${state.page==='overview'?'Tournament Hub':state.page.charAt(0).toUpperCase()+state.page.slice(1)}`;
+    $('app').innerHTML=header()+pages[state.page]()+footer();
+  }
+  function go(page){state.page=page;state.menu=false;state.flash='';render();window.scrollTo({top:0,behavior:'instant'});}
+  function flash(msg,type='ok'){state.flash=msg;state.flashType=type;render();}
+  const nullNum=v=>v===''||v==null?null:Number(v);
+  const errorMessage=err=>err?.message||'Something went wrong. Please retry.';
+  async function refresh(){
+    if(!db){render();return;}
+    try{
+      const keys=['teams','matches','players','player_performances'];
+      const fetched=await Promise.all(keys.map(k=>db.from(k).select('*')));
+      const bad=fetched.find(r=>r.error);
+      if(bad)throw bad.error;
+      keys.forEach((k,i)=>state[k]=fetched[i].data||[]);
+      const site = await db.from('site_settings').select('*').eq('id',1).maybeSingle();
+      if(site.error) throw site.error;
+      if(site.data) Object.assign(cfg, {name:site.data.name,shortName:site.data.short_name,season:site.data.season,tagline:site.data.tagline,announcement:site.data.announcement});
+      state.mode='live';state.flash='';render();
+    }catch(err){state.mode='error';state.flash=`Could not load live data: ${errorMessage(err)}`;state.flashType='error';render();}
+  }
+  async function checkAdmin(){
+    if(!db)return;
+    const {data:{session},error}=await db.auth.getSession();
+    if(error||!session){state.session=null;state.admin=false;return;}
+    state.session=session;
+    const {data,error:adminError}=await db.from('admin_users').select('user_id').eq('user_id',session.user.id).maybeSingle();
+    state.admin=!!data&&!adminError;
+  }
+  async function actionWrite(fn,success){
+    if(!state.admin||!db){flash('Admin access required.','error');return;}
+    try{
+      const res=await fn();if(res.error)throw res.error;
+      await refresh();flash(success);
+    }catch(err){flash(errorMessage(err),'error');}
+  }
+  async function onSubmit(form){
+    const data=Object.fromEntries(new FormData(form));
+    if(form.id==='login-form'){
+      if(!db){flash('Connect Supabase first to enable admin login.','error');return;}
+      const {error}=await db.auth.signInWithPassword({email:data.email,password:data.password});
+      if(error){flash(error.message,'error');return;}
+      await checkAdmin();
+      if(!state.admin){await db.auth.signOut();flash('This account does not have administrator access.','error');return;}
+      await refresh();flash('Signed in successfully. Welcome to your dashboard.');return;
+    }
+    if(!state.admin){flash('Please log in as an admin first.','error');return;}
+    if(form.id==='settings-form'){
+      const payload={name:String(data.name||'').trim(),short_name:String(data.short_name||'').trim().toUpperCase(),season:String(data.season||'').trim(),tagline:String(data.tagline||'').trim(),announcement:String(data.announcement||'').trim()};
+      if(!payload.name||!payload.short_name){flash('Please enter a tournament name and short name.','error');return;}
+      await actionWrite(()=>db.from('site_settings').update(payload).eq('id',1),'Website settings updated.');return;
+    }
+    if(form.id==='team-form'){
+      const payload={name:String(data.name||'').trim(),short_name:String(data.short_name||'').trim().toUpperCase(),color:safeColor(data.color)};
+      if(!payload.name||payload.short_name.length<2||payload.short_name.length>5){flash('Enter a valid team name and 2–5 character short code.','error');return;}
+      const edit=state.editTeamId;
+      await actionWrite(()=>edit?db.from('teams').update(payload).eq('id',edit):db.from('teams').insert(payload),'Team saved.');state.editTeamId='';return;
+    }
+    if(form.id==='match-form'){
+      if(!data.team1_id||!data.team2_id||data.team1_id===data.team2_id){flash('Choose two different teams.','error');return;}
+      const payload={team1_id:data.team1_id,team2_id:data.team2_id,stage:String(data.stage||'').trim()||'League match',scheduled_at:data.scheduled_at?new Date(data.scheduled_at).toISOString():null};
+      await actionWrite(()=>db.from('matches').insert(payload),'Fixture created.');return;
+    }
+    if(form.id==='results-form'){
+      const m=state.matches.find(m=>m.id===data.match_id);if(!m){flash('Select a match.','error');return;}
+      const payload={team1_runs:nullNum(data.team1_runs),team1_wickets:nullNum(data.team1_wickets),team2_runs:nullNum(data.team2_runs),team2_wickets:nullNum(data.team2_wickets),status:data.status,winner_id:data.winner_id||null,result_summary:String(data.result_summary||'').trim()};
+      if(Object.entries(payload).some(([k,v])=>['team1_runs','team1_wickets','team2_runs','team2_wickets'].includes(k)&&v!==null&&(!Number.isInteger(v)||v<0||(['team1_wickets','team2_wickets'].includes(k)&&v>10)))){flash('Runs and wickets must be valid non-negative whole numbers (maximum 10 wickets).','error');return;}
+      if(payload.status==='completed'&&(payload.team1_runs===null||payload.team2_runs===null)){flash('Enter both teams’ runs for a completed match.','error');return;}
+      await actionWrite(()=>db.from('matches').update(payload).eq('id',data.match_id),'Result saved and published. Points table updated.');return;
+    }
+    if(form.id==='player-form'){
+      if(!data.name.trim()||!data.team_id){flash('Choose a team and player name.','error');return;}
+      await actionWrite(()=>db.from('players').insert({name:data.name.trim(),team_id:data.team_id,role:data.role?.trim()||'Player'}),'Player added.');return;
+    }
+    if(form.id==='stat-form'){
+      if(!data.match_id||!data.player_id){flash('Choose a match and player.','error');return;}
+      const m=state.matches.find(m=>m.id===data.match_id),p=state.players.find(p=>p.id===data.player_id);
+      if(!m||!p||![m.team1_id,m.team2_id].includes(p.team_id)){flash('This player does not belong to either team in that match.','error');return;}
+      const payload={match_id:data.match_id,player_id:data.player_id,runs:Number(data.runs),wickets:Number(data.wickets),catches:Number(data.catches)};
+      if([payload.runs,payload.wickets,payload.catches].some(n=>!Number.isInteger(n)||n<0)){flash('Enter non-negative whole numbers.','error');return;}
+      await actionWrite(()=>db.from('player_performances').upsert(payload,{onConflict:'match_id,player_id'}),'Player performance saved.');return;
+    }
+  }
+  document.addEventListener('click',async event=>{
+    const t=event.target.closest('button,a');if(!t)return;
+    if(t.dataset.page){event.preventDefault();go(t.dataset.page);return;}
+    if(t.dataset.filter){state.matchFilter=t.dataset.filter;render();return;}
+    if(t.dataset.adminTab){state.adminTab=t.dataset.adminTab;state.flash='';render();return;}
+    if(t.dataset.action==='toggle-menu'){state.menu=!state.menu;render();return;}
+    if(t.dataset.action==='cancel-edit-team'){state.editTeamId='';render();return;}
+    if(t.dataset.action==='logout'){if(db)await db.auth.signOut();state.admin=false;state.session=null;go('overview');return;}
+    if(t.dataset.editTeam){state.editTeamId=t.dataset.editTeam;state.adminTab='teams';render();return;}
+    if(t.dataset.editMatch){state.selectedMatchId=t.dataset.editMatch;state.adminTab='results';render();return;}
+    const deleteMap=[['deleteMatch','matches','match'],['deleteTeam','teams','team'],['deletePlayer','players','player'],['deleteStat','player_performances','performance']];
+    for(const [attr,table,label] of deleteMap){if(t.dataset[attr]){
+      if(!confirm(`Delete this ${label}? This cannot be undone.`))return;
+      await actionWrite(()=>db.from(table).delete().eq('id',t.dataset[attr]),`${label.charAt(0).toUpperCase()+label.slice(1)} deleted.`);return;
+    }}
+  });
+  document.addEventListener('change',event=>{
+    if(event.target.name==='pick_match'){state.selectedMatchId=event.target.value;render();}
+  });
+  document.addEventListener('submit',async event=>{
+    if(!event.target.matches('form'))return;
+    event.preventDefault();const submit=event.target.querySelector('button[type="submit"]');if(submit){submit.disabled=true;submit.textContent='Saving…';}
+    try{await onSubmit(event.target);}catch(err){flash(errorMessage(err),'error');}finally{if(submit?.isConnected){submit.disabled=false;submit.textContent='Save';}}
+  });
+  async function init(){
+    render();
+    if(cfg.supabaseUrl&&cfg.supabaseAnonKey){
+      if(!window.supabase){state.flash='Supabase library did not load. Check your internet connection.';state.flashType='error';render();return;}
+      try{db=window.supabase.createClient(cfg.supabaseUrl,cfg.supabaseAnonKey);await refresh();await checkAdmin();render();}
+      catch(err){state.flash=errorMessage(err);state.flashType='error';render();}
+    }
+  }
+  init();
+})();
+
+  </script>
 </body>
 </html>
