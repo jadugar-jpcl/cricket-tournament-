@@ -43,6 +43,39 @@ html{scroll-behavior:auto!important}
 
 .swipe-hint{font-size:10px;text-align:right;color:#72859d;padding:7px 14px 0;font-weight:800;display:none}
 @media(max-width:720px){.swipe-hint{display:block}}
+
+/* JPCL rulebook: official numbered regulations */
+.rules-public-card{padding:12px 22px}
+.rules-public-list{padding:0;margin:0;list-style:none;counter-reset:none}
+.rule-public-item{display:flex;gap:16px;align-items:flex-start;padding:18px 3px;border-bottom:1px solid var(--line)}
+.rule-public-item:last-child{border-bottom:0}
+.rule-number{display:grid;place-items:center;flex:0 0 37px;min-width:37px;height:37px;border-radius:11px;background:#e7f7d0;color:#3f661d;font:900 20px 'Barlow Condensed',sans-serif}
+.rule-content{font-size:14px;line-height:1.7;font-weight:600;white-space:pre-wrap;overflow-wrap:anywhere;padding:6px 0}
+.rules-footer{font-size:11px;color:#71829b;font-weight:800;margin:13px 5px}
+.rule-admin-list{display:flex;flex-direction:column;gap:9px}
+.rule-admin-item{display:flex;align-items:center;gap:12px;background:#f8fafc;border:1px solid var(--line);border-radius:12px;padding:12px;min-width:0}
+.rule-admin-text{flex:1;min-width:0;overflow-wrap:anywhere;white-space:pre-wrap;font-size:12px;font-weight:700;color:#34435d;line-height:1.55}
+.rule-admin-item .ctrl{flex-shrink:0}
+@media(max-width:620px){.rules-public-card{padding:6px 12px}.rule-public-item{gap:11px;padding:15px 0}.rule-number{min-width:31px;flex-basis:31px;height:31px;font-size:17px}.rule-content{font-size:13px;padding-top:4px}.rule-admin-item{align-items:flex-start;flex-wrap:wrap}.rule-admin-item .rule-admin-text{flex:1 1 calc(100% - 55px)}.rule-admin-item .ctrl{width:100%;justify-content:flex-start;padding-left:43px}}
+
+/* JPCL Player rankings: two concise Top 10 tables, horizontally scrollable on phones. */
+.leader-section{border:1px solid var(--line);border-radius:17px;background:#fff;box-shadow:var(--shadow);margin:22px 0;overflow:hidden}
+.leader-head{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:20px 22px 18px;border-bottom:1px solid var(--line)}
+.leader-head h2{font:900 30px 'Barlow Condensed',sans-serif;margin:1px 0 5px;letter-spacing:.3px}
+.leader-head p{margin:0;font-size:12px;color:var(--sub);line-height:1.6}
+.leader-eyebrow{font-size:10px;letter-spacing:1.5px;font-weight:900;color:#5d8c23}
+.leader-count{font-size:10px;white-space:nowrap;background:#e8f8d0;color:#50732d;border-radius:100px;padding:7px 10px;font-weight:900}
+.leader-swipe-hint{color:#66768b;font-size:11px;padding:8px 18px;font-weight:700;background:#f8fafc}
+.leader-table-scroll{overflow-x:auto;overscroll-behavior-x:contain;scrollbar-width:thin}
+.leader-table{border-collapse:collapse;min-width:930px;width:100%;font-size:12px}
+.leader-table th{text-align:center;padding:13px 10px;background:#f3f6f9;color:#72829a;letter-spacing:.7px;font-size:10px;white-space:nowrap}
+.leader-table td{border-top:1px solid #ecf0f4;padding:12px 10px;text-align:center;font-variant-numeric:tabular-nums;white-space:nowrap}
+.leader-table tr:nth-child(2n){background:#fbfcfe}
+.leader-table th:nth-child(2),.leader-table td:nth-child(2){text-align:left}
+.leader-table .leader-name{font-weight:900;color:#1b2b46}
+.leader-table .leader-primary{font-weight:900;color:#4d7b19;background:#f3f9e9}
+.leader-table .leader-rank{color:#8392a8;font-weight:800}
+@media(max-width:600px){.leader-head{padding:17px 15px}.leader-head h2{font-size:27px}.leader-head p{font-size:11px}.leader-table{min-width:820px}}
 </style>
 </head>
 <body><div id="app">Loading JPCL…</div>
@@ -58,16 +91,25 @@ const imageURL=s=>{try{const u=new URL(String(s||''));return u.protocol==='https
 const D={name:'Jadugar Paltalk Cricket League',short_name:'JPCL',season:'SEASON 01',tagline:'Official Tournament Hub',announcement:'',editor:{}};
 const TEXT_GROUPS={
  'Homepage':[['heroEyebrow','Hero small heading','OFFICIAL TOURNAMENT HUB'],['hero1','Hero heading first line','EVERY RUN.'],['hero2','Hero heading second line','EVERY RIVALRY.'],['hero3','Hero highlighted line','EVERY RESULT.'],['heroDescription','Hero description','Official fixtures, match results and team information for the Jadugar Paltalk Cricket League.'],['heroAction1','First button','See fixtures'],['heroAction2','Second button','Points tables'],['homeResults','Home results title','Recent results'],['homeStandings','Home standings title','Current standings'],['homeUpcoming','Home upcoming title','Next fixtures'],['bannerTitle','Bottom banner title','THE LEAGUE. THE MOMENTS. THE GLORY.'],['bannerDescription','Bottom banner description','Official JPCL tournament news, results and announcements.'],['bannerButton','Bottom banner button','Admin dashboard']],
- 'Public pages':[['matchesTitle','Matches page title','FIXTURES & RESULTS'],['matchesDescription','Matches page description','Match schedules and official results published by JPCL.'],['standingsTitle','Points tables page title','THE POINTS TABLES'],['standingsDescription','Points tables description','Independent standings for each round, updated automatically after results.'],['teamsTitle','Teams page title','OUR TEAMS & SQUADS'],['teamsDescription','Teams and their registered players.'],['playersTitle','Players page title','PLAYER LEADERBOARDS'],['playersDescription','Runs, wickets and catches from official match records.']],
+ 'Public pages':[['matchesTitle','Matches page title','FIXTURES & RESULTS'],['matchesDescription','Matches page description','Match schedules and official results published by JPCL.'],['standingsTitle','Points tables page title','THE POINTS TABLES'],['standingsDescription','Points tables description','Independent standings for each round, updated automatically after results.'],['teamsTitle','Teams page title','OUR TEAMS & SQUADS'],['teamsDescription','Teams and their registered players.'],['playersTitle','Players page title','TOP 10 BATSMEN & BOWLERS'],['playersDescription','Players page description','Official JPCL batting and bowling leaderboards.']],
  'Footer and metadata':[['footer','Footer credit','Managed by JPCL.'],['announcementTitle','Announcement heading','LEAGUE ANNOUNCEMENT'],['seo','Search engine description','JPCL official cricket tournament fixtures, results, teams and rankings.']]
 };
-const BASE_NAV=[['overview','Home'],['matches','Matches'],['standings','Points Table'],['teams','Teams'],['players','Player Stats']];
-const T={page:'overview',menu:false,tab:'results',filter:'all',admin:false,session:null,mode:'loading',message:'',messageType:'ok',settings:{...D},teams:[],matches:[],players:[],player_performances:[],edits:{},selectedMatch:'',editingPage:null,activeRound:'',editingStanding:''};
+const BASE_NAV=[['overview','Home'],['matches','Matches'],['standings','Points Table'],['teams','Teams'],['players','Player Stats'],['rules','Rules']];
+const T={page:'overview',menu:false,tab:'results',filter:'all',admin:false,session:null,mode:'loading',message:'',messageType:'ok',settings:{...D},teams:[],matches:[],players:[],player_performances:[],edits:{},selectedMatch:'',editingPage:null,activeRound:'',editingStanding:'',editingRule:'',editingBat:'',editingBowl:''};
 let db=null;
 const cfg=()=>T.settings;
 const cms=()=>cfg().editor||{};
 const tx=(key)=>{for(const items of Object.values(TEXT_GROUPS)){const item=items.find(x=>x[0]===key);if(item)return String(cms().text?.[key]??item[2]);}return ''};
 const text=(key)=>esc(tx(key));
+// JPCL Rules are structured, automatically numbered and persisted in site_settings.editor.
+const rulebook=()=>cms().rulebook||{};
+const listRules=()=>Array.isArray(rulebook().items)?rulebook().items.filter(r=>r&&typeof r.id==='string'&&typeof r.text==='string'):[];
+const ruleTitle=()=>String(rulebook().title||'JPCL TOURNAMENT RULES');
+const ruleIntro=()=>String(rulebook().intro??'Official rules and regulations for the Jadugar Paltalk Cricket League.');
+const ruleLimit=60;
+const newRuleId=()=>('rule_'+Math.random().toString(36).slice(2,13));
+const saveRulebook=async(next,message)=>{const ed=copy();ed.rulebook=next;T.editingRule='';await write(db.from('site_settings').update({editor:ed}).eq('id',1),message)};
+const ruleItem=(r,i)=>`<li class="rule-public-item"><span class="rule-number">${i+1}</span><div class="rule-content">${esc(r.text)}</div></li>`;
 const nav=()=>[...BASE_NAV.map(([id,label])=>({id,label:cms().nav?.[id]?.label||label,visible:cms().nav?.[id]?.visible!==false})),...(cms().pages||[]).filter(x=>x&&/^custom_[a-z0-9_]+$/.test(x.id)).map(p=>({id:p.id,label:p.title,visible:p.visible!==false}))];
 const team=id=>T.teams.find(x=>x.id===id)||{name:'Unknown',short_name:'?',color:'#e4e8ed'};
 const player=id=>T.players.find(x=>x.id===id)||{name:'Unknown'};
@@ -117,6 +159,44 @@ const groupedTables=(stage,admin=false)=>{
 };
 const allCompleted=()=>T.matches.filter(scored);
 const sortedMatches=()=>[...T.matches].sort((a,b)=>String(a.scheduled_at||a.created_at||'').localeCompare(String(b.scheduled_at||b.created_at||'')));
+// Public top ten rankings are stored as structured admin edits, independently of team and match data.
+// Batting: avg = runs / dismissals, SR = runs / balls * 100.
+// Bowling: econ = runs conceded / (balls / 6), with cricket overs such as 4.3 meaning 4 overs and 3 balls.
+const leaderboard=()=>cms().leaderboards||{};
+const battingRecords=()=>leaderboard().batting||{};
+const bowlingRecords=()=>leaderboard().bowling||{};
+const rankedPlayers=kind=>{
+ const data=kind==='batting'?battingRecords():bowlingRecords();
+ return Object.entries(data).filter(([id,r])=>T.players.some(p=>p.id===id)&&r&&typeof r==='object')
+  .map(([id,rec])=>({p:player(id),team:team(player(id).team_id),...rec,id}))
+  .sort((a,b)=>kind==='batting'?(Number(b.runs||0)-Number(a.runs||0)||Number(b.highScore||0)-Number(a.highScore||0)||a.p.name.localeCompare(b.p.name)):
+   (Number(b.wickets||0)-Number(a.wickets||0)||Number(a.runsConceded||0)-Number(b.runsConceded||0)||a.p.name.localeCompare(b.p.name)));
+};
+const cricketBalls=value=>{const match=/^(\d+)(?:\.([0-5]))?$/.exec(String(value||'0'));return match?Number(match[1])*6+Number(match[2]||0):0};
+const battingAvg=r=>Number(r.outs)>0?(Number(r.runs||0)/Number(r.outs)).toFixed(2):'—';
+const battingSR=r=>Number(r.balls)>0?(100*Number(r.runs||0)/Number(r.balls)).toFixed(2):'—';
+const bowlingAvg=r=>Number(r.wickets)>0?(Number(r.runsConceded||0)/Number(r.wickets)).toFixed(2):'—';
+const bowlingEcon=r=>cricketBalls(r.overs)>0?(Number(r.runsConceded||0)*6/cricketBalls(r.overs)).toFixed(2):'—';
+const bowlingBest=r=>Number.isInteger(Number(r.bestWickets))&&r.bestWickets!==''&&r.bestWickets!=null?`${Number(r.bestWickets)}/${Number(r.bestRuns||0)}`:'—';
+const topTenTable=kind=>{
+ const batting=kind==='batting';const list=rankedPlayers(kind).slice(0,10);
+ if(!list.length)return empty('No '+(batting?'batting':'bowling')+' rankings published yet. Add players and enter their statistics in Admin → Player Stats.');
+ const headers=batting?['#','BATSMAN','RUNS','TEAM','M','INN','BALLS','4s','6s','HS','AVG','SR']:['#','BOWLER','WKT','TEAM','M','INN','OVERS','RUNS','MDN','BEST','AVG','ECON'];
+ const cols=list.map((r,i)=>{
+  const cells=batting?[i+1,r.p.name,r.runs??0,r.team.short_name,r.matches??0,r.innings??0,r.balls??0,r.fours??0,r.sixes??0,r.highScore??0,battingAvg(r),battingSR(r)]:
+   [i+1,r.p.name,r.wickets??0,r.team.short_name,r.matches??0,r.innings??0,r.overs??'0',r.runsConceded??0,r.maidens??0,bowlingBest(r),bowlingAvg(r),bowlingEcon(r)];
+  return `<tr>${cells.map((x,j)=>`<td class="${j===1?'leader-name':j===0?'leader-rank':j===2?'leader-primary':''}">${esc(x)}</td>`).join('')}</tr>`;
+ }).join('');
+ return `<div class="leader-swipe-hint">Swipe sideways to see all statistics →</div><div class="leader-table-scroll"><table class="leader-table"><thead><tr>${headers.map(v=>`<th>${esc(v)}</th>`).join('')}</tr></thead><tbody>${cols}</tbody></table></div>`;
+};
+const leaderboardField=(label,key,val='',max=9999)=>f(label,key,val,'number',`required min="0" max="${max}" step="1"`);
+const chosenRecord=kind=>{const id=kind==='batting'?T.editingBat:T.editingBowl;return (kind==='batting'?battingRecords():bowlingRecords())[id]||{}};
+const saveRanking=async(kind,record,playerId,message)=>{
+ const ed=copy();ed.leaderboards=ed.leaderboards||{};
+ ed.leaderboards[kind]={...(ed.leaderboards[kind]||{}),[playerId]:record};
+ T.editingBat='';T.editingBowl='';
+ await write(db.from('site_settings').update({editor:ed}).eq('id',1),message);
+};
 const performance=p=>{const a=T.player_performances.filter(x=>x.player_id===p.id);return {p,played:a.length,runs:a.reduce((s,x)=>s+(x.runs||0),0),wickets:a.reduce((s,x)=>s+(x.wickets||0),0),catches:a.reduce((s,x)=>s+(x.catches||0),0)}};
 const sbtn=(name,action,cls='ghost')=>`<button type="button" class="btn small ${cls}" data-action="${esc(action)}">${esc(name)}</button>`;
 const empty=message=>`<div class="empty">🏏<div style="margin-top:9px">${esc(message)}</div></div>`;
@@ -136,7 +216,10 @@ function home(){const m=T.matches.find(m=>m.status==='live')||T.matches.find(m=>
 function matchesPage(){const list=sortedMatches().filter(m=>T.filter==='all'||m.status===T.filter);return `<main class="main"><div class="container">${pagehead(tx('matchesTitle'),tx('matchesDescription'),'THE MATCH CENTRE')}<div class="select-tabs" style="margin:14px 0">${[['all','All matches'],['upcoming','Upcoming'],['live','Live'],['completed','Results']].map(([id,label])=>`<button class="${T.filter===id?'active':''}" data-filter="${id}">${label}</button>`).join('')}</div><div class="card">${list.length?list.map(matchLine).join(''):empty('No matches for this filter yet.')}</div>${banner()}</div></main>`}
 function standingsPage(){const all=rounds();return `<main class="main"><div class="container">${pagehead(tx('standingsTitle'),tx('standingsDescription'),'LEAGUE RANKINGS')}${all.length?all.map(r=>{const ms=roundMatches(r);return `<section class="card round"><h2>${esc(r)} — POINTS TABLE <span class="round-summary">${ms.filter(scored).length} / ${ms.length} matches</span></h2>${groupedTables(r)}</section>`}).join(''):`<section class="card round"><h2>POINTS TABLE</h2>${table(calcTable(T.matches,''))}</section>`}${all.length>1&&cms().showCombined!==false?`<section class="card round"><h2>ALL ROUNDS — MATCH RESULTS ONLY</h2>${table(calcTable(T.matches,'',true))}</section>`:''}<div class="note">Scoring: ${pointValue('win')} points for a win, ${pointValue('tie')} for a tie. Group membership and manual NRR or points values are managed separately for each round. The combined table uses match results only.</div></div></main>`}
 function teamsPage(){return `<main class="main"><div class="container">${pagehead(tx('teamsTitle'),tx('teamsDescription'),'MEET THE COMPETITORS')}<div class="grid3">${T.teams.map(t=>{const squad=T.players.filter(p=>p.team_id===t.id).sort((a,b)=>a.name.localeCompare(b.name));return `<div class="card"><div class="squad-head">${crest(t)}<div><strong>${esc(t.name)}</strong><small>${esc(t.short_name)} · ${squad.length} player(s)</small></div></div>${squad.length?`<ol class="squad-list">${squad.map(p=>`<li><b>${esc(p.name)}</b><small>${esc(p.role)}</small></li>`).join('')}</ol>`:empty('No players registered yet.')}</div>`}).join('')||`<div class="card">${empty('Teams will appear here.')}</div>`}</div>${banner()}</div></main>`}
-function playersPage(){const ps=T.players.map(performance);const ranking=(key,label)=>section(label,'OFFICIAL RANKINGS',ps.sort((a,b)=>b[key]-a[key]).slice(0,15).map((x,i)=>`<div class="stat-row"><span><b style="color:#8b9bb0">${i+1}.</b> <strong>${esc(x.p.name)}</strong><small> · ${esc(team(x.p.team_id).name)}</small></span><span class="numbers">${x[key]} ${key==='runs'?'runs':key}</span></div>`).join('')||empty('Players will appear here.'));return `<main class="main"><div class="container">${pagehead(tx('playersTitle'),tx('playersDescription'),'INDIVIDUAL PERFORMANCES')}<div class="grid3">${ranking('runs','Top run scorers')}${ranking('wickets','Top wicket takers')}${ranking('catches','Top catches')}</div>${banner()}</div></main>`}
+function playersPage(){return `<main class="main"><div class="container">${pagehead(tx('playersTitle'),tx('playersDescription'),'OFFICIAL PLAYER RANKINGS')}
+ <section class="leader-section"><div class="leader-head"><div><span class="leader-eyebrow">BATTING</span><h2>TOP 10 BATSMEN</h2><p>Most runs first. Batting average and strike rate calculated from your entered stats.</p></div><span class="leader-count">${Math.min(10,rankedPlayers('batting').length)} PLAYERS</span></div>${topTenTable('batting')}</section>
+ <section class="leader-section"><div class="leader-head"><div><span class="leader-eyebrow">BOWLING</span><h2>TOP 10 BOWLERS</h2><p>Most wickets first. Economy and bowling average calculated automatically.</p></div><span class="leader-count">${Math.min(10,rankedPlayers('bowling').length)} PLAYERS</span></div>${topTenTable('bowling')}</section>${banner()}</div></main>`}
+function rulesPage(){const rs=listRules();return `<main class="main"><div class="container">${pagehead(ruleTitle(),ruleIntro(),'OFFICIAL RULEBOOK')}<div class="card rules-public-card">${rs.length?`<ol class="rules-public-list">${rs.map(ruleItem).join('')}</ol>`:empty('The tournament rules will appear here once the JPCL admin publishes them.')}</div><div class="rules-footer">${rs.length} official ${rs.length===1?'rule':'rules'} · Published by JPCL</div></div></main>`}
 function customPage(){const p=(cms().pages||[]).find(p=>p.id===T.page);return `<main class="main"><div class="container">${pagehead(p?.title||'Page','',cfg().season)}<article class="card prose">${esc(p?.body||'Content coming soon.')}</article></div></main>`}
 function loginPage(){return `<main class="main"><div class="container"><div class="card pad auth-card"><div class="kicker" style="color:#5c8c23">JPCL ADMIN</div><h2>ADMIN LOGIN</h2><p style="font-size:12px;color:#657389">Sign in using your approved JPCL admin email and password.</p>${flash()}<form id="login-form"><div class="field"><label>Email</label><input name="email" type="email" autocomplete="username" required></div><div class="field" style="margin-top:14px"><label>Password</label><input name="password" type="password" autocomplete="current-password" required></div><button type="submit" class="btn primary" style="width:100%;margin-top:18px">Sign in securely</button></form></div></div></main>`}
 const f=(label,key,val='',type='text',attrs='')=>`<div class="field"><label for="in_${esc(key)}">${esc(label)}</label><input id="in_${esc(key)}" name="${esc(key)}" type="${esc(type)}" value="${esc(val)}" ${attrs}></div>`;
@@ -155,11 +238,52 @@ function tabContent(){return `<div class="form-card"><h3>Public text editor</h3>
 function tabDesign(){const d=cms().theme||{};return `<div class="form-card"><h3>Colours, logo and images</h3><p>Logo and hero images use publicly accessible HTTPS URLs. Leave either URL empty to use the built-in artwork.</p><form id="design-form"><div class="form-grid">${f('Accent colour','accent',d.accent||'#c6fb63','color')}${f('Background colour','paper',d.paper||'#f3f6fa','color')}${f('Dark header colour','dark',d.dark||'#0b1429','color')}${f('Logo image URL','logo',d.logo||'','url','placeholder="https://..."')}${f('Homepage background image URL','heroImage',d.heroImage||'','url','placeholder="https://..."')}</div>${sb('Save design')}</form></div>`}
 function tabNav(){return `<div class="form-card"><h3>Navigation menu</h3><p>Rename or hide public menu items. The Admin Login button is always available.</p><form id="nav-form"><div class="split">${BASE_NAV.map(([id,label])=>`<div class="menu-edit">${f(`${label} — menu label`,'label_'+id,cms().nav?.[id]?.label||label,'text','maxlength="40"')}${chk('Show in menu','show_'+id,cms().nav?.[id]?.visible!==false)}</div>`).join('')}</div>${sb('Save navigation')}</form></div>`}
 function tabPages(){const p=(cms().pages||[]).find(x=>x.id===T.editingPage);return `<div class="form-card"><h3>${p?'Edit':'Create'} information page</h3><p>Add custom pages for rules, prizes, sponsors or any informational content.</p><form id="page-form"><div class="form-grid">${f('Page title','title',p?.title||'','text','required maxlength="70"')}<div class="wide">${ta('Page text','body',p?.body||'',9)}</div></div>${chk('Show in main menu','visible',p?.visible!==false)}<div class="actions">${sb(p?'Save page':'Create page')}${p?act('Cancel','cancel-page',''):''}</div></form></div><div class="form-card"><h3>Existing information pages</h3>${(cms().pages||[]).map(p=>item(p.title,p.visible===false?'Hidden from menu':'Visible in menu',act('Edit','edit-page',p.id)+act('Delete','delete-page',p.id,'danger'))).join('')||empty('No extra pages yet.')}</div>`}
+function tabTournamentRules(){
+ const rules=listRules(),selected=rules.find(r=>r.id===T.editingRule);
+ return `<div class="form-card"><h3>Rules page details</h3><p>Change the page heading and introduction. To show or hide Rules in the public menu, open Admin → Menu.</p><form id="rulebook-settings-form">
+ <div class="form-grid">${f('Rules page heading','rules_title',ruleTitle(),'text','required maxlength="90"')}
+ <div class="wide">${ta('Introduction (optional)','rules_intro',ruleIntro(),3)}</div></div>${sb('Save Rules page details')}</form></div>
+ <div class="form-card"><h3>${selected?'Edit rule':'Add a numbered rule'}</h3><p>Each rule gets a number automatically. You can change its wording later.</p><form id="rulebook-item-form"><div class="field">${ta(selected?'Edit this rule':'Enter your rule','rule_text',selected?.text||'',4)}</div>
+ <div class="actions">${sb(selected?'Save rule changes':'Add Rule')}${selected?act('Cancel','cancel-rule',''):''}</div></form>
+ <p class="adminhint">Example: Each team must submit its final squad before the first match.</p></div>
+ <div class="form-card"><h3>Add several rules at once</h3><p>Paste 10–20 rules, one per line. You can include 1., 2., 3. at the start; numbering will be handled automatically.</p>
+ <form id="rulebook-bulk-form"><div class="field">${ta('Paste one rule per line','bulk_rules','',8)}</div>${sb('Add all rules')}</form></div>
+ <div class="form-card"><h3>Published rules (${rules.length})</h3><p>Use ▲ and ▼ to change their order. Their public numbers change automatically.</p>
+ <div class="rule-admin-list">${rules.map((r,i)=>`<div class="rule-admin-item"><span class="rule-number">${i+1}</span><div class="rule-admin-text">${esc(r.text)}</div><div class="ctrl">
+ ${i?act('▲','rule-up',r.id):''}${i<rules.length-1?act('▼','rule-down',r.id):''}${act('Edit','edit-rule',r.id)}${act('Delete','delete-rule',r.id,'danger')}
+ </div></div>`).join('')||empty('No rules added yet. Start with Add Rule above.')}</div></div>`;
+}
 function tabTeams(){const a=editItem('teams');return `<div class="form-card"><h3>${a?'Edit':'Add'} team</h3><p>Team name, short code and colour appear throughout the website.</p><form id="team-form"><div class="form-grid">${f('Team name','name',a?.name||'','text','required maxlength="70"')}${f('Short code (2–5 letters)','short_name',a?.short_name||'','text','required minlength="2" maxlength="5"')}${f('Team colour','color',a?.color||'#c6fb63','color')}</div><div class="actions">${sb(a?'Save team':'Add team')}${a?act('Cancel','cancel-edit','teams'):''}</div></form></div><div class="form-card"><h3>Registered teams (${T.teams.length})</h3>${T.teams.map(t=>item(t.name,`${t.short_name} · ${T.players.filter(p=>p.team_id===t.id).length} players`,act('Add players','add-player-team',t.id)+act('Edit','edit','teams:'+t.id)+act('Delete','delete','teams:'+t.id,'danger'))).join('')||empty('Add your first team to get started.')}</div>`}
 function tabPlayers(){const a=editItem('players');return `<div class="form-card"><h3>${a?'Edit':'Add'} player</h3><p>Assign each player to a team. Their name then appears in that team's public squad.</p><form id="player-form"><div class="form-grid">${f('Player name','name',a?.name||'','text','required maxlength="80"')}${sel('Team','team_id',optsTeams(),a?.team_id||T.edits.defaultTeam,'Select team')}${f('Role','role',a?.role||'Player','text','maxlength="40"')}</div><div class="actions">${sb(a?'Save player':'Add player')}${a?act('Cancel','cancel-edit','players'):''}</div></form></div><div class="form-card"><h3>Registered players (${T.players.length})</h3>${T.players.map(p=>item(p.name,`${team(p.team_id).name} · ${p.role}`,act('Edit','edit','players:'+p.id)+act('Delete','delete','players:'+p.id,'danger'))).join('')||empty('Players can be added after teams.')}</div>`}
 function tabFixtures(){const a=editItem('matches');const current=a?.scheduled_at?new Date(a.scheduled_at).toISOString().slice(0,16):'';return `<div class="form-card"><h3>${a?'Edit':'Add'} fixture</h3><p>Enter a round name such as <b>Round 2</b> to create its own points table automatically.</p><form id="fixture-form"><div class="form-grid">${sel('Team A','team1_id',optsTeams(),a?.team1_id)}${sel('Team B','team2_id',optsTeams(),a?.team2_id)}${f('Round or stage','stage',a?.stage||'Round 1','text','required maxlength="80" list="round-names"')}<datalist id="round-names">${[...new Set(['Round 1','Round 2','Round 3',...rounds()])].map(r=>`<option value="${esc(r)}"></option>`).join('')}</datalist>${f('Schedule (optional)','scheduled_at',current,'datetime-local')}</div><div class="actions">${sb(a?'Save fixture':'Add fixture')}${a?act('Cancel','cancel-edit','matches'):''}</div></form></div><div class="form-card"><h3>Fixtures (${T.matches.length})</h3>${sortedMatches().map(m=>item(`${team(m.team1_id).short_name} vs ${team(m.team2_id).short_name}`,`${m.stage} · ${status(m)} · ${dateStr(m.scheduled_at)}`,act('Edit','edit','matches:'+m.id)+act('Score','score-match',m.id)+act('Delete','delete','matches:'+m.id,'danger'))).join('')||empty('Add teams first, then create fixtures.')}</div>`}
 function tabResults(){const m=T.matches.find(x=>x.id===T.selectedMatch)||sortedMatches()[0];const opts=(id)=>T.teams.filter(t=>t.id===m?.team1_id||t.id===m?.team2_id).map(t=>[t.id,t.name]);return `<div class="form-card"><h3>Enter or correct match result</h3><p>Results instantly update the public page and the correct round standings.</p>${m?`<form id="result-form">${sel('Select match','match_id',optsMatches(),m.id)}<div class="form-grid">${sel('Match status','status',[['upcoming','Upcoming'],['live','Live'],['completed','Completed']],m.status)}${sel('Winner (leave blank for tie)','winner_id',opts(),m.winner_id)}${f(`${team(m.team1_id).short_name} runs`,'team1_runs',m.team1_runs??'','number','min="0" max="9999"')}${f(`${team(m.team1_id).short_name} wickets`,'team1_wickets',m.team1_wickets??'','number','min="0" max="10"')}${f(`${team(m.team1_id).short_name} overs`,'team1_overs',m.team1_overs??'','number','min="0" max="999.5" step="0.1"')}${f(`${team(m.team2_id).short_name} runs`,'team2_runs',m.team2_runs??'','number','min="0" max="9999"')}${f(`${team(m.team2_id).short_name} wickets`,'team2_wickets',m.team2_wickets??'','number','min="0" max="10"')}${f(`${team(m.team2_id).short_name} overs`,'team2_overs',m.team2_overs??'','number','min="0" max="999.5" step="0.1"')}<div class="wide">${ta('Result summary','result_summary',m.result_summary||'',3)}</div></div>${sb('Save match result')}</form>`:empty('Create a fixture first.')} </div><div class="form-card"><h3>Recorded matches</h3>${sortedMatches().map(x=>item(`${team(x.team1_id).short_name} vs ${team(x.team2_id).short_name}`,`${x.stage} · ${status(x)}`,act('Score','score-match',x.id))).join('')||empty('No fixtures.')}</div>`}
-function tabStats(){return `<div class="form-card"><h3>Player match statistics</h3><p>Saving the same player and match again updates the recorded statistics.</p><form id="stats-form"><div class="form-grid">${sel('Match','match_id',optsMatches(),T.edits.statMatch)}${sel('Player','player_id',optsPlayers(),T.edits.statPlayer)}${f('Runs','runs',0,'number','required min="0" max="9999"')}${f('Wickets','wickets',0,'number','required min="0" max="10"')}${f('Catches','catches',0,'number','required min="0" max="10"')}</div>${sb('Save player statistics')}</form></div><div class="form-card"><h3>Saved records</h3>${T.player_performances.map(x=>item(player(x.player_id).name,`${x.runs} runs · ${x.wickets} wickets · ${x.catches} catches`,act('Edit','edit-stat',x.id)+act('Delete','delete','player_performances:'+x.id,'danger'))).join('')||empty('No player statistics yet.')}</div>`}
+function tabStats(){const ba=chosenRecord('batting'),bo=chosenRecord('bowling');
+ const batId=T.editingBat||'',bowlId=T.editingBowl||'';
+ return `<div class="note">Two editable TOP 10 lists: batsmen ranked by runs and bowlers ranked by wickets. A player may appear in both. Add the player to a team first, then save their batting or bowling figures here. Only the top 10 in each category will appear publicly.</div>
+ <div class="form-card"><h3>🏏 ${batId?'Edit':'Add'} batsman statistics</h3><p>Enter matches, innings, runs, balls faced, boundaries, highest score and dismissals. Average and strike rate calculate automatically.</p>
+ <form id="batting-form"><div class="form-grid">${sel('Batsman','player_id',optsPlayers(),batId,'Select player')}
+ ${leaderboardField('Matches (M)','games',ba.matches??0,999)}${leaderboardField('Innings (INN)','innings',ba.innings??0,999)}
+ ${leaderboardField('Runs','runs',ba.runs??0,99999)}${leaderboardField('Balls faced','balls',ba.balls??0,99999)}
+ ${leaderboardField('Fours (4s)','fours',ba.fours??0,9999)}${leaderboardField('Sixes (6s)','sixes',ba.sixes??0,9999)}
+ ${leaderboardField('Highest score (HS)','highScore',ba.highScore??0,9999)}${leaderboardField('Times out (for average)','outs',ba.outs??0,999)}
+ </div><div class="actions">${sb(batId?'Save batsman changes':'Publish batsman stats')}${batId?act('Cancel','cancel-leader','batting'):''}</div></form></div>
+ <div class="form-card"><h3>🎯 ${bowlId?'Edit':'Add'} bowler statistics</h3><p>Enter overs like 4.3 for 4 overs and 3 balls. Economy and bowling average calculate automatically.</p>
+ <form id="bowling-form"><div class="form-grid">${sel('Bowler','player_id',optsPlayers(),bowlId,'Select player')}
+ ${leaderboardField('Matches (M)','games',bo.matches??0,999)}${leaderboardField('Innings (INN)','innings',bo.innings??0,999)}
+ ${f('Overs (e.g. 4.3)','overs',bo.overs??'0','text','required inputmode="decimal" pattern="[0-9]+(\.[0-5])?" maxlength="8"')}
+ ${leaderboardField('Runs conceded','runsConceded',bo.runsConceded??0,99999)}${leaderboardField('Wickets','wickets',bo.wickets??0,999)}
+ ${leaderboardField('Maiden overs','maidens',bo.maidens??0,999)}
+ ${leaderboardField('Best: wickets','bestWickets',bo.bestWickets??0,10)}${leaderboardField('Best: runs given','bestRuns',bo.bestRuns??0,9999)}
+ </div><div class="actions">${sb(bowlId?'Save bowler changes':'Publish bowler stats')}${bowlId?act('Cancel','cancel-leader','bowling'):''}</div></form></div>
+ <div class="form-card"><h3>Batting leaderboard entries (${rankedPlayers('batting').length})</h3>
+ ${rankedPlayers('batting').map((r,i)=>item('#'+(i+1)+' '+r.p.name,`${r.team.name} · ${r.runs} runs · HS ${r.highScore} · Avg ${battingAvg(r)} · SR ${battingSR(r)}`,act('Edit','edit-leader','batting|'+r.id)+act('Remove','remove-leader','batting|'+r.id,'danger'))).join('')||empty('No batsmen added to leaderboard.')}</div>
+ <div class="form-card"><h3>Bowling leaderboard entries (${rankedPlayers('bowling').length})</h3>
+ ${rankedPlayers('bowling').map((r,i)=>item('#'+(i+1)+' '+r.p.name,`${r.team.name} · ${r.wickets} wickets · Best ${bowlingBest(r)} · Econ ${bowlingEcon(r)}`,act('Edit','edit-leader','bowling|'+r.id)+act('Remove','remove-leader','bowling|'+r.id,'danger'))).join('')||empty('No bowlers added to leaderboard.')}</div>
+ <div class="form-card"><h3>Individual match performance entries (optional)</h3><p>Existing per-match run and wicket figures remain available. They are separate from the published top-10 lists.</p>
+ <form id="stats-form"><div class="form-grid">${sel('Match','match_id',optsMatches(),T.edits.statMatch)}${sel('Player','player_id',optsPlayers(),T.edits.statPlayer)}
+ ${f('Runs','runs',0,'number','required min="0" max="9999"')}${f('Wickets','wickets',0,'number','required min="0" max="10"')}</div>${sb('Save match performance')}</form>
+ ${T.player_performances.map(x=>item(player(x.player_id).name,`${x.runs} runs · ${x.wickets} wickets`,act('Edit','edit-stat',x.id)+act('Delete','delete','player_performances:'+x.id,'danger'))).join('')||empty('No match performances yet.')}</div>`;
+}
 function tabRounds(){const names=rounds();const rows=Object.entries(cms().adjustments||{}).flatMap(([stage,obj])=>Object.entries(obj||{}).filter(([,v])=>Number(v)).map(([tid,val])=>({stage,tid,val})));return `<div class="form-card"><h3>Independent round tables</h3><p>Create Round 2, Round 3 or any round without adding matches first.</p><form id="round-form">${f('New round name','round_name','','text','required maxlength="80"')}${sb('Create points table')}</form><div style="margin-top:13px">${(cms().rounds||[]).map(r=>item(r,'Standalone table',act('Remove','delete-round',r,'danger'))).join('')||'<p class="adminhint">Rounds with fixtures are created automatically.</p>'}</div></div><div class="form-card"><h3>Scoring rules</h3><form id="rules-form"><div class="form-grid">${f('Points for win','win',pointValue('win'),'number','required min="0" max="100"')}${f('Points for tie','tie',pointValue('tie'),'number','required min="0" max="100"')}</div>${chk('Show all-rounds combined table','show_combined',cms().showCombined!==false)}${sb('Save points rules')}</form></div><div class="form-card"><h3>Points adjustments</h3><p>Add bonus points or deductions for a team in a selected round. Enter 0 to remove the adjustment.</p><form id="adjust-form"><div class="form-grid">${sel('Round','stage',names.map(x=>[x,x]),'')}${sel('Team','team_id',optsTeams(),'')}${f('Bonus (+) or penalty (-)','delta',0,'number','required min="-100" max="100"')}</div>${sb('Save points adjustment')}</form>${rows.map(x=>item(team(x.tid).name,`${x.stage} · ${x.val} points`,act('Remove','remove-adjust',x.stage+'|'+x.tid,'danger'))).join('')}</div>`}
 
 function adminGroupControls(){
@@ -191,10 +315,10 @@ function adminGroupControls(){
 }
 const OLD_tabRounds=tabRounds;
 tabRounds=()=>OLD_tabRounds()+adminGroupControls();
-const TABS=[['results','🏏 Results'],['fixtures','▦ Fixtures'],['teams','⚑ Teams'],['players','♙ Players'],['stats','◈ Player Stats'],['rounds','🏆 Points Tables'],['settings','⚙ Site Settings'],['content','✏ Page Content'],['design','🎨 Design'],['nav','☰ Menu'],['pages','▤ Extra Pages']];
-const TAB_FN={results:tabResults,fixtures:tabFixtures,teams:tabTeams,players:tabPlayers,stats:tabStats,rounds:tabRounds,settings:tabSettings,content:tabContent,design:tabDesign,nav:tabNav,pages:tabPages};
+const TABS=[['results','🏏 Results'],['fixtures','▦ Fixtures'],['teams','⚑ Teams'],['players','♙ Players'],['stats','◈ Player Stats'],['rounds','🏆 Points Tables'],['settings','⚙ Site Settings'],['content','✏ Page Content'],['design','🎨 Design'],['nav','☰ Menu'],['pages','▤ Extra Pages'],['rulebook','📜 Tournament Rules']];
+const TAB_FN={results:tabResults,fixtures:tabFixtures,teams:tabTeams,players:tabPlayers,stats:tabStats,rounds:tabRounds,settings:tabSettings,content:tabContent,design:tabDesign,nav:tabNav,pages:tabPages,rulebook:tabTournamentRules};
 function adminPage(){if(!T.admin)return loginPage();return `<main class="main"><div class="container">${pagehead('ADMIN DASHBOARD','Manage the entire JPCL website from here — no code editing required.','TOURNAMENT CONTROL CENTRE')}${flash()}<div class="admin-layout"><div class="admin-menu">${TABS.map(([id,label])=>`<button class="${T.tab===id?'active':''}" data-tab="${id}">${label}</button>`).join('')}<button data-action="logout">⇤ Sign out</button></div><div><div class="admin-header"><h2>${esc(TABS.find(x=>x[0]===T.tab)?.[1]||'Admin')}</h2><span class="badge">ADMIN ONLY</span></div>${(TAB_FN[T.tab]||tabResults)()}</div></div></div></main>`}
-function draw(){const t=cms().theme||{};document.documentElement.style.setProperty('--accent',color(t.accent||'#c6fb63'));document.documentElement.style.setProperty('--bg',color(t.paper||'#f3f6fa'));document.documentElement.style.setProperty('--dark',color(t.dark||'#0b1429'));const pt=(cms().pages||[]).find(x=>x.id===T.page);document.title=`${cfg().short_name||'JPCL'} | ${pt?.title||(T.page==='overview'?'Tournament Hub':T.page)}`;const title=document.querySelector('meta[name="description"]');if(title)title.content=tx('seo');const pages={overview:home,matches:matchesPage,standings:standingsPage,teams:teamsPage,players:playersPage,admin:adminPage};$('app').innerHTML=header()+(pages[T.page]||customPage)()+footer();}
+function draw(){const t=cms().theme||{};document.documentElement.style.setProperty('--accent',color(t.accent||'#c6fb63'));document.documentElement.style.setProperty('--bg',color(t.paper||'#f3f6fa'));document.documentElement.style.setProperty('--dark',color(t.dark||'#0b1429'));const pt=(cms().pages||[]).find(x=>x.id===T.page);document.title=`${cfg().short_name||'JPCL'} | ${pt?.title||(T.page==='overview'?'Tournament Hub':T.page)}`;const title=document.querySelector('meta[name="description"]');if(title)title.content=tx('seo');const pages={overview:home,matches:matchesPage,standings:standingsPage,teams:teamsPage,players:playersPage,rules:rulesPage,admin:adminPage};$('app').innerHTML=header()+(pages[T.page]||customPage)()+footer();}
 function go(page){T.page=page;T.menu=false;T.message='';draw();scrollTo({top:0,behavior:'instant'})}
 function alert(msg,type='ok'){T.message=msg;T.messageType=type;draw()}
 function numeric(v,max=9999){if(v===''||v==null)return null;const n=Number(v);if(!Number.isInteger(n)||n<0||n>max)throw Error('Enter valid non-negative whole numbers.');return n}
@@ -206,6 +330,28 @@ const copy=()=>structuredClone(cms());
 async function handleForm(form){const d=Object.fromEntries(new FormData(form));
  if(form.id==='login-form'){const {error}=await db.auth.signInWithPassword({email:d.email,password:d.password});if(error)throw error;const yes=await checkAdmin();if(!yes){await db.auth.signOut();throw Error('This login has not been approved as a JPCL administrator.')}await refresh('Signed in successfully.');return}
  if(!T.admin)throw Error('Please sign in before changing website data.');
+ if(form.id==='rulebook-settings-form'){
+   const title=String(d.rules_title||'').trim().slice(0,90),intro=String(d.rules_intro||'').trim().slice(0,2000);
+   if(!title)throw Error('Enter a heading for the Rules page.');
+   await saveRulebook({...rulebook(),title,intro},'Rules page heading updated.');return;
+ }
+ if(form.id==='rulebook-item-form'){
+   const content=String(d.rule_text||'').trim().slice(0,1500);
+   if(!content)throw Error('Enter the text for this rule.');
+   const items=listRules().map(r=>({...r}));
+   if(T.editingRule){const rule=items.find(r=>r.id===T.editingRule);if(!rule)throw Error('Rule no longer exists.');rule.text=content;}
+   else{if(items.length>=ruleLimit)throw Error('The Rules page supports up to '+ruleLimit+' points.');items.push({id:newRuleId(),text:content});}
+   await saveRulebook({...rulebook(),items},'Rule saved and published.');return;
+ }
+ if(form.id==='rulebook-bulk-form'){
+   const entries=String(d.bulk_rules||'').split(/\r?\n/).map(s=>s.trim().replace(/^(?:rule\s*)?\d{1,3}\s*[.)\-:]\s*/i,'').trim()).filter(Boolean);
+   if(!entries.length)throw Error('Paste at least one rule, one per line.');
+   if(entries.some(r=>r.length>1500))throw Error('Each rule must be under 1500 characters.');
+   const items=listRules().map(r=>({...r}));
+   if(items.length+entries.length>ruleLimit)throw Error('Maximum '+ruleLimit+' rules. You can add '+(ruleLimit-items.length)+' more.');
+   for(const entry of entries)items.push({id:newRuleId(),text:entry});
+   await saveRulebook({...rulebook(),items},entries.length+' rules added and published.');return;
+ }
  if(form.id==='settings-form'){const payload={name:d.name.trim(),short_name:d.short_name.trim().toUpperCase(),season:d.season.trim(),tagline:d.tagline.trim(),announcement:d.announcement.trim()};if(!payload.name||!payload.short_name)throw Error('Enter both names.');await write(db.from('site_settings').update(payload).eq('id',1),'Website settings saved.');return}
  if(form.id==='content-form'){const ed=copy();ed.text={...(ed.text||{})};for(const items of Object.values(TEXT_GROUPS))for(const [key] of items)ed.text[key]=String(d[key]||'').trim().slice(0,1500);await write(db.from('site_settings').update({editor:ed}).eq('id',1),'Page content published.');return}
  if(form.id==='design-form'){if((d.logo&&!imageURL(d.logo))||(d.heroImage&&!imageURL(d.heroImage)))throw Error('Use a public HTTPS URL for each image.');const ed=copy();ed.theme={accent:color(d.accent),paper:color(d.paper),dark:color(d.dark),logo:imageURL(d.logo),heroImage:imageURL(d.heroImage)};await write(db.from('site_settings').update({editor:ed}).eq('id',1),'Design published.');return}
@@ -215,7 +361,27 @@ async function handleForm(form){const d=Object.fromEntries(new FormData(form));
  if(form.id==='player-form'){const name=String(d.name||'').trim(),role=String(d.role||'').trim()||'Player';if(!name||!T.teams.some(t=>t.id===d.team_id))throw Error('Choose a team and player name.');const payload={name,role,team_id:d.team_id};let id=T.edits.players;T.edits.players='';await write(id?db.from('players').update(payload).eq('id',id):db.from('players').insert(payload),id?'Player updated.':'Player added.');return}
  if(form.id==='fixture-form'){if(!d.team1_id||!d.team2_id||d.team1_id===d.team2_id)throw Error('Choose two different teams.');const payload={team1_id:d.team1_id,team2_id:d.team2_id,stage:String(d.stage||'').trim()||'Round 1',scheduled_at:d.scheduled_at?new Date(d.scheduled_at).toISOString():null};let id=T.edits.matches;T.edits.matches='';await write(id?db.from('matches').update(payload).eq('id',id):db.from('matches').insert(payload),id?'Fixture updated.':'Fixture created.');return}
  if(form.id==='result-form'){const m=T.matches.find(x=>x.id===d.match_id);if(!m)throw Error('Choose a valid match.');if(d.winner_id&&![m.team1_id,m.team2_id].includes(d.winner_id))throw Error('Winner must be a participating team.');const payload={status:d.status,team1_runs:numeric(d.team1_runs),team2_runs:numeric(d.team2_runs),team1_wickets:numeric(d.team1_wickets,10),team2_wickets:numeric(d.team2_wickets,10),team1_overs:d.team1_overs===''?null:Number(d.team1_overs),team2_overs:d.team2_overs===''?null:Number(d.team2_overs),winner_id:d.winner_id||null,result_summary:String(d.result_summary||'').trim()};if(!['upcoming','live','completed'].includes(payload.status))throw Error('Choose a match status.');if([payload.team1_overs,payload.team2_overs].some(v=>v!=null&&(!Number.isFinite(v)||v<0||v>999.5)))throw Error('Enter a valid number of overs.');if(payload.status==='completed'&&(payload.team1_runs===null||payload.team2_runs===null))throw Error('Enter both scores before marking completed.');await write(db.from('matches').update(payload).eq('id',m.id),'Match result published.');return}
- if(form.id==='stats-form'){if(!d.match_id||!d.player_id)throw Error('Choose a match and player.');const m=T.matches.find(x=>x.id===d.match_id),p=T.players.find(x=>x.id===d.player_id);if(!m||!p||![m.team1_id,m.team2_id].includes(p.team_id))throw Error('Player must belong to a team in the selected match.');const payload={match_id:d.match_id,player_id:d.player_id,runs:nonNeg(d.runs,0,9999),wickets:nonNeg(d.wickets,0,10),catches:nonNeg(d.catches,0,10)};await write(db.from('player_performances').upsert(payload,{onConflict:'match_id,player_id'}),'Player statistics saved.');return}
+ if(form.id==='batting-form'){
+  if(!T.players.some(p=>p.id===d.player_id))throw Error('Choose a registered batsman.');
+  const keys=['matches','innings','runs','balls','fours','sixes','highScore','outs'];const record={};
+  for(const key of keys)record[key]=nonNeg(d[key==='matches'?'games':key],0,key==='runs'||key==='balls'?99999:key==='matches'||key==='innings'||key==='outs'?999:key==='highScore'?9999:9999);
+  if(record.innings>record.matches)throw Error('Innings cannot be greater than matches.');
+  if(record.outs>record.innings)throw Error('Times out cannot be greater than innings.');
+  if(record.highScore>record.runs)throw Error('Highest score cannot exceed total runs.');
+  await saveRanking('batting',record,d.player_id,'Batsman leaderboard updated.');return;
+ }
+ if(form.id==='bowling-form'){
+  if(!T.players.some(p=>p.id===d.player_id))throw Error('Choose a registered bowler.');
+  const rawOvers=String(d.overs||'0').trim();if(!/^[0-9]+(?:\.[0-5])?$/.test(rawOvers))throw Error('Enter overs in cricket format, such as 4.3 (4 overs and 3 balls).');
+  const record={overs:rawOvers};
+  for(const key of ['matches','innings','runsConceded','wickets','maidens','bestWickets','bestRuns'])
+   record[key]=nonNeg(d[key==='matches'?'games':key],0,key==='runsConceded'?99999:key==='bestWickets'?10:key==='bestRuns'?9999:999);
+  if(record.innings>record.matches)throw Error('Innings cannot exceed matches.');
+  if(record.bestWickets>record.wickets)throw Error('Best bowling wickets cannot exceed total wickets.');
+  if(record.maidens>Math.floor(cricketBalls(rawOvers)/6))throw Error('Maidens cannot exceed completed overs.');
+  await saveRanking('bowling',record,d.player_id,'Bowler leaderboard updated.');return;
+ }
+ if(form.id==='stats-form'){if(!d.match_id||!d.player_id)throw Error('Choose a match and player.');const m=T.matches.find(x=>x.id===d.match_id),p=T.players.find(x=>x.id===d.player_id);if(!m||!p||![m.team1_id,m.team2_id].includes(p.team_id))throw Error('Player must belong to a team in the selected match.');const payload={match_id:d.match_id,player_id:d.player_id,runs:nonNeg(d.runs,0,9999),wickets:nonNeg(d.wickets,0,10),catches:T.player_performances.find(x=>x.match_id===d.match_id&&x.player_id===d.player_id)?.catches??0};await write(db.from('player_performances').upsert(payload,{onConflict:'match_id,player_id'}),'Player statistics saved.');return}
 
  if(form.id==='new-group-form'){
   const round=rounds().find(x=>roundKey(x)===roundKey(d.round)),name=String(d.group_name||'').trim().slice(0,40);
@@ -263,13 +429,36 @@ async function handleAction(action,id){
   T.activeRound=round;T.editingStanding='';await write(db.from('site_settings').update({editor:ed}).eq('id',1),'Group removed.');return;
  }
 
+ if(action==='edit-leader'){
+  const split=id.indexOf('|'),kind=id.slice(0,split),pid=id.slice(split+1);
+  if(!['batting','bowling'].includes(kind)||!T.players.some(p=>p.id===pid))return;
+  if(kind==='batting')T.editingBat=pid;else T.editingBowl=pid;
+  T.tab='stats';draw();$(kind+'-form')?.scrollIntoView({block:'center',behavior:'instant'});return;
+ }
+ if(action==='cancel-leader'){if(id==='batting')T.editingBat='';else T.editingBowl='';draw();return;}
+ if(action==='remove-leader'){
+  const split=id.indexOf('|'),kind=id.slice(0,split),pid=id.slice(split+1);
+  if(!['batting','bowling'].includes(kind)||!T.players.some(p=>p.id===pid))return;
+  if(!confirm('Remove this player from the '+(kind==='batting'?'batsmen':'bowlers')+' top-10 list? They will remain in their team.'))return;
+  const ed=copy();ed.leaderboards=ed.leaderboards||{};ed.leaderboards[kind]={...(ed.leaderboards[kind]||{})};delete ed.leaderboards[kind][pid];
+  await write(db.from('site_settings').update({editor:ed}).eq('id',1),'Player removed from '+kind+' leaderboard.');return;
+ }
+ if(action==='edit-rule'){if(!listRules().some(r=>r.id===id))return;T.editingRule=id;T.tab='rulebook';draw();$('rulebook-item-form')?.scrollIntoView({block:'center',behavior:'instant'});return}
+ if(action==='cancel-rule'){T.editingRule='';draw();return}
+ if(action==='delete-rule'){if(!confirm('Delete this tournament rule?'))return;const items=listRules().filter(r=>r.id!==id);await saveRulebook({...rulebook(),items},'Rule deleted.');return}
+ if(action==='rule-up'||action==='rule-down'){
+   const items=listRules().map(r=>({...r}));const a=items.findIndex(r=>r.id===id),b=a+(action==='rule-up'?-1:1);
+   if(a<0||b<0||b>=items.length)return;
+   [items[a],items[b]]=[items[b],items[a]];
+   await saveRulebook({...rulebook(),items},'Rules reordered.');return;
+ }
  if(action==='logout'){await db.auth.signOut();T.admin=false;T.session=null;go('overview');return}
  if(action==='cancel-edit'){T.edits[id]='';draw();return}
  if(action==='cancel-page'){T.editingPage=null;draw();return}
  if(action==='add-player-team'){T.edits.defaultTeam=id;T.tab='players';draw();return}
  if(action==='score-match'){T.selectedMatch=id;T.tab='results';draw();return}
  if(action==='edit'){const [table,rowId]=id.split(':');if(!['teams','matches','players'].includes(table))return;T.edits[table]=rowId;T.tab=table==='matches'?'fixtures':table;draw();return}
- if(action==='edit-stat'){const p=T.player_performances.find(x=>x.id===id);if(!p)return;T.tab='stats';T.edits.statMatch=p.match_id;T.edits.statPlayer=p.player_id;draw();const f=$('stats-form');for(const k of ['runs','wickets','catches'])f.elements[k].value=p[k];return}
+ if(action==='edit-stat'){const p=T.player_performances.find(x=>x.id===id);if(!p)return;T.tab='stats';T.edits.statMatch=p.match_id;T.edits.statPlayer=p.player_id;draw();const f=$('stats-form');for(const k of ['runs','wickets'])f.elements[k].value=p[k];return}
  if(action==='edit-page'){T.editingPage=id;T.tab='pages';draw();return}
  if(action==='delete-page'){if(!confirm('Delete this information page?'))return;const ed=copy();ed.pages=(ed.pages||[]).filter(p=>p.id!==id);await write(db.from('site_settings').update({editor:ed}).eq('id',1),'Information page deleted.');return}
  if(action==='delete-round'){if(!confirm('Remove this standalone round table? Fixture results will not be deleted.'))return;const ed=copy();ed.rounds=(ed.rounds||[]).filter(x=>x!==id);await write(db.from('site_settings').update({editor:ed}).eq('id',1),'Standalone round removed.');return}
